@@ -1,0 +1,37 @@
+[package]
+name = "mpt"
+version = "0.1.0"
+authors = ["Dejavukong <foxcong.yolo@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+hashbrown = { version = "0.9.1" }
+hash = { package = "keccak-hash", default-features = false, git = "https://github.com/cfll19/parity-common.git" }
+rlp  = { default-features = false, git = "https://github.com/cfll19/parity-common.git" }
+sp-std = { default-features = false, version = '2.0.0'}
+serde = { version = "1.0", features = ["derive"] }
+serde_derive = "1.0.117"
+serde_json = "1.0.59"
+rocksdb = "0.16.0"
+tokio = { version = "1", features = ["full"] }
+futures = "0.3.4"
+async-std = { version = "1", features = ["attributes", "tokio1"] }
+async-trait   = { version = "0.1.68" }
+log = "0.4.11"
+chrono = "0.4.26"
+
+[dev-dependencies]
+# crates
+criterion      = { version = "0.3.3" }
+ethereum-types = { version = "0.5.2" }
+hex            = { version = "0.4.2" }
+rand           = { version = "0.7.3" }
+
+[features]
+default = ["std"]
+std = [
+    "hash/std",
+    "rlp/std",
+]
