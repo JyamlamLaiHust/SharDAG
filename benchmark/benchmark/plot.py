@@ -13,10 +13,12 @@ import os
 
 class Plot:
   def __init__(self):
+      # 初始化路径
       self.input_path = 'results'
+      # 如果给出的文件路径不存在，则抛出异常
       if not os.path.exists(self.input_path):
         raise FileNotFoundError(f"The directory '{self.input_path}' does not exist. Please run the benchmarks first to get enough results")  
-      
+
       self.data = 'data'
       if not os.path.exists(self.data):
         os.makedirs(self.data)
@@ -26,7 +28,7 @@ class Plot:
       self.hue_order = ['Monoxide-BS', 'BrokerChain-BS', 'SharDAG']      
       self.pattern=['//','\\\\', '//\\\\']
 
-
+  # 解析单个日志文件的TPS和延迟
   def _parse_res_single(self, log):
     tmp = findall(r'End-to-end execution TPS: ([^ ]+) tx/s', log) 
     tps = [int(d.replace(',','')) for d in tmp] 
@@ -34,12 +36,13 @@ class Plot:
     latency = [int(d.replace(',','')) for d in tmp] 
     return tps, latency
 
-
+  # 解析结果并保存至CSV文件
   def _parse_res(self, res_path, input_rate):
     print(f'Parsing the result file (input_rate={input_rate})')
     out_f = open(res_path, 'w+')
     out_f.write('type,input_rate,method,nodes_per_host,total_nodes,shard_num,shard_size,cs_faults,tps,latency\n')
 
+    # 获取输入路径下所有文件的列表
     files = os.listdir(self.input_path)
     for i in files:
         file_path = os.path.join(self.input_path, i)
@@ -59,7 +62,7 @@ class Plot:
                   out_f.write(f'{t[1]},{t[8]},{method},8,{int(t[4])*int(t[5])},{t[4]},{t[5]},{t[7]},{tps[i]},{latency[i]}\n')
     out_f.close()
 
-
+  # 绘制TPS图
   def draw_tps(self, df, output_file):
     g = sns.barplot(
       data=df,
@@ -98,7 +101,7 @@ class Plot:
     plt.savefig(output_file, bbox_inches='tight', dpi=600)
     plt.clf()
 
-
+  # 绘制延迟图
   def draw_latency(self, df, output_file):
     g = sns.barplot(
       data=df,

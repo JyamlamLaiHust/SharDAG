@@ -19,7 +19,7 @@ def local(ctx, debug=False):
         'rate': [200], # transaction sending rate per node
         'duration': 40, # running duration
         'total_txs': 1000000, # 1000000
-        'tx_size': 512, # B
+        'tx_size': 512, # B 事务大小为512B
 
         'acc_shard_type': 0, # 0: Hash, 1: Graph
         'executor_type': 0, # 0: SharDAG, 1: Monoxide, 2: Broker
@@ -32,7 +32,7 @@ def local(ctx, debug=False):
         'gc_depth': 50,  # rounds
         'sync_retry_delay': 10_000,  # ms
         'sync_retry_nodes': 3,  # number of nodes
-        'batch_size': 500_000,  # bytes
+        'batch_size': 500_000,  # bytes 最大块大小为500MB
         'max_batch_delay': 200  # ms
     }
     try:

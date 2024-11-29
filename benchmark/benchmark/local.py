@@ -14,8 +14,10 @@ from collections import OrderedDict
 class LocalBench:
     BASE_PORT = 3000
 
+    # 分配端口
     def __init__(self, bench_parameters_dict, node_parameters_dict):
         try:
+            # 初始化基准参数和节点参数
             self.bench_parameters = BenchParameters(bench_parameters_dict)
             self.node_parameters = NodeParameters(node_parameters_dict)
             # static local params
@@ -26,14 +28,17 @@ class LocalBench:
             raise BenchError('Invalid nodes or bench parameters', e)
 
     def __getattr__(self, attr):
+        # 动态代理，从基准参数中获取属性
         return getattr(self.bench_parameters, attr)
 
     def _background_run(self, command, log_file):
-        name = splitext(basename(log_file))[0]
-        cmd = f'{command} 2> {log_file}'
-        subprocess.run(['tmux', 'new', '-d', '-s', name, cmd], check=True)
+        # 在后台运行指定命令，并将输出记录到日志文件
+        name = splitext(basename(log_file))[0] #提取无后缀的文件名
+        cmd = f'{command} 2> {log_file}' #重定向到日志文件
+        subprocess.run(['tmux', 'new', '-d', '-s', name, cmd], check=True) #使用tmux后台运行
 
     def _kill_nodes(self):
+        # 终止所有的运行节点
         try:
             cmd = CommandMaker.kill().split()
             subprocess.run(cmd, stderr=subprocess.DEVNULL)
@@ -41,54 +46,57 @@ class LocalBench:
             raise BenchError('Failed to kill testbed', e)
 
 
-    # generate config file for (shard_num, shard_size) setting. 
-    # one _config may be used in multiple runs
+
     def _config(self, shard_number, shard_size):
-      Print.info('Setting up testbed...')
-      # Cleanup all files.
-      cmd = CommandMaker.cleanup_config()
-      subprocess.run([cmd], shell=True, stderr=subprocess.DEVNULL)
+        """
+        为特定分片数量和大小的配置生成配置文件。
+        该配置可以用于多次运行。
+        """
+        Print.info('Setting up testbed...')  # 输出提示信息
+        cmd = CommandMaker.cleanup_config()  # 清理旧的配置
+        subprocess.run([cmd], shell=True, stderr=subprocess.DEVNULL)  # 静默执行清理命令
 
-      # Recompile the latest code.
-      cmd = CommandMaker.compile().split()
-      subprocess.run(cmd, check=True, cwd=PathMaker.node_crate_path())
+        # 编译最新代码
+        cmd = CommandMaker.compile().split()
+        subprocess.run(cmd, check=True, cwd=PathMaker.node_crate_path())  # 在指定路径中执行
 
-      # Create alias for the client and nodes binary.
-      cmd = CommandMaker.alias_binaries(PathMaker.binary_path())
-      subprocess.run([cmd], shell=True)
+        # 为客户端和节点生成别名
+        cmd = CommandMaker.alias_binaries(PathMaker.binary_path())
+        subprocess.run([cmd], shell=True)
 
-      # Generate configuration files.
-      committees = OrderedDict()
-      committeeList = []
+        # 初始化配置
+        committees = OrderedDict()  # 保证分片顺序一致
+        committeeList = []  # 存储每个分片的委员会信息
 
-      print("Node name list: ")
-      shardid = 0
-      while shardid < shard_number:
-          keys = []
-          key_files = [PathMaker.key_file(i, shardid) for i in range(shard_size)]
-          for filename in key_files:
-              cmd = CommandMaker.generate_key(filename).split()  # generate key for each node
-              subprocess.run(cmd, check=True)
-              keys += [Key.from_file(filename)]
-              # print(keys)  # for debug
+        print("Node name list: ")
+        shardid = 0
+        while shardid < shard_number:
+            # 为每个分片生成密钥并创建委员会
+            keys = []
+            key_files = [PathMaker.key_file(i, shardid) for i in range(shard_size)]  # 为分片生成密钥文件路径
+            for filename in key_files:
+                cmd = CommandMaker.generate_key(filename).split()  # 为每个节点生成密钥
+                subprocess.run(cmd, check=True)  # 执行密钥生成命令
+                keys += [Key.from_file(filename)]  # 从文件中加载密钥
 
-          names = [x.name for x in keys]
-          print("shard", shardid, sorted(names))
-          committee = LocalCommittee(names, self.BASE_PORT, self.workers, shardid)
-          committee.print(PathMaker.committee_file(shardid))
-          committeeList.append(committee)
-          committees[shardid] = committee.json
+            names = [x.name for x in keys]  # 获取节点名称
+            print("shard", shardid, sorted(names))  # 输出分片信息
+            # 创建本地委员会对象
+            committee = LocalCommittee(names, self.BASE_PORT, self.workers, shardid)
+            committee.print(PathMaker.committee_file(shardid))  # 输出委员会信息到文件
+            committeeList.append(committee)  # 保存委员会到列表
+            committees[shardid] = committee.json  # 将委员会转换为JSON格式并存储
 
-          shardid += 1
-          self.BASE_PORT += 6 * shard_size
+            shardid += 1
+            self.BASE_PORT += 6 * shard_size  # 更新端口以适配更多节点
 
-      # generate .parameters.json
-      self.node_parameters.print(PathMaker.parameters_file())
-      # generate .committees.json
-      committees = Committees(committees, self.client_addr, shard_number, shard_size)
-      committees.print(PathMaker.committees_file())
+        # 生成节点参数文件
+        self.node_parameters.print(PathMaker.parameters_file())
+        # 生成委员会配置文件
+        committees = Committees(committees, self.client_addr, shard_number, shard_size)
+        committees.print(PathMaker.committees_file())
 
-      return committeeList
+        return committeeList  # 返回委员会列表
 
     def _run_single(self, executor_type, epoch, shard_num, shard_size, total_rate, total_txs, committeeList, debug=False):
 
@@ -220,7 +228,8 @@ class LocalBench:
 
 
     def run(self, debug=False):
-        assert isinstance(debug, bool)
+        # 运行完整的基准测试
+        assert isinstance(debug, bool) # 确保debug是布尔值
         Print.heading('Starting local benchmark')
 
         for shard_number in self.bench_parameters.shard_numbers: 

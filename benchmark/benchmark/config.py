@@ -7,35 +7,43 @@ class ConfigError(Exception):
     pass
 
 
+# 密钥类
 class Key:
     def __init__(self, name, secret):
-        self.name = name
-        self.secret = secret
+        self.name = name # 密钥名
+        self.secret = secret # 密钥内容
 
     @classmethod
     def from_file(cls, filename):
+        """
+            通过文件创建Key实例
+        """
         assert isinstance(filename, str)
         with open(filename, 'r') as f:
             data = load(f)
         return cls(data['name'], data['secret'])
 
-
+# 委员会类，用于管理分布式系统中的多个委员会
 class Committees:
   def __init__(self, committees, client_addr, shard_num, shard_size):
+    # 初始化委员会类
     self.json = {'shards': committees, 'client': client_addr, 'shard_num': shard_num, 'shard_size': shard_size}
 
   def shard(self, shard_id):
+    # 返回分片数据
     return self.json['shards'][shard_id]
 
   def client(self):
+    # 返回客户端信息
     return self.client()
 
   def print(self, filename):
+    # 将委员会数据写入文件
     assert isinstance(filename, str)
     with open(filename, 'a') as f:
         dump(self.json, f, indent=4, sort_keys=True)
 
-
+# Committee类，表示一个单独的委员会
 class Committee:
     """ The committee looks as follows:
         "authorities: {
@@ -68,6 +76,7 @@ class Committee:
         """
         #  addresses = OrderedDict((x, ['127.0.0.1']*(1+workers)) for x in names)
         #  base_port=3000
+        # 初始化委员会，地址为字典格式，端口为基准端口列表，shardid为分片ID
         assert isinstance(addresses, OrderedDict)
         assert all(isinstance(x, str) for x in addresses.keys())
         assert all(
@@ -81,6 +90,7 @@ class Committee:
         self.shardID = shardid  # 0,1
 
         # self.json = {f'{shardid}': {'authorities': OrderedDict()}}
+        # 初始化Json格式
         self.json = {'authorities': OrderedDict()}
         nodeid = 0
         for name, hosts in addresses.items():
@@ -96,6 +106,7 @@ class Committee:
             port += 2
 
             workers_addr = OrderedDict()
+            # 遍历工作节点，分配端口
             for j, host in enumerate(hosts):
                 workers_addr[j] = {
                     'primary_to_worker': f'{host}:{port}',
@@ -105,6 +116,7 @@ class Committee:
                 }
                 port += 4
 
+            # 将节点的权限和工作节点信息添加到委员会数据中
             # self.json[f'{shardid}']['authorities'][name]
             self.json['authorities'][name] = {
                 'stake': 1,
@@ -113,14 +125,14 @@ class Committee:
             }
 
     def authorities(self, faults=0):
-        """ Returns an ordered list of authorities. """
+        # 返回排除故障节点后的有效委员会成员列表
         assert faults < self.size()
         good_nodes = self.size() - faults
         authorities = list(self.json['authorities'].keys())[:good_nodes]
         return authorities  
 
     def primary_addresses(self, faults=0):
-        """ Returns an ordered list of primaries' addresses. """
+        # 返回排除故障节点后的有效主节点地址列表
         assert faults < self.size()
         addresses = []
         good_nodes = self.size() - faults
@@ -129,7 +141,7 @@ class Committee:
         return addresses
 
     def workers_addresses(self, faults=0):
-        """ Returns an ordered list of workers' addresses. """
+        # 返回排除故障节点后的有效工作节点地址列表。
         assert faults < self.size()
         addresses = []
         good_nodes = self.size() - faults
@@ -141,7 +153,7 @@ class Committee:
         return addresses
 
     def ips(self, name=None):
-        """ Returns all the ips associated with an authority (in any order). """
+        # 返回一个节点或所有节点的IP地址列表。
         if name is None:
             names = list(self.json['authorities'].keys())
         else:
@@ -190,7 +202,7 @@ class Committee:
         assert isinstance(address, str)
         return address.split(':')[0]
 
-
+# LocalCommittee是Committee类的子类，专门处理本地地址的委员会
 class LocalCommittee(Committee):
     def __init__(self, names, port, workers, shardid):
         assert isinstance(names, list)
@@ -210,7 +222,7 @@ class LocalCommittee(Committee):
         addresses = OrderedDict((x, ['127.0.0.1'] * (1 + workers)) for x in names)
         super().__init__(addresses, base_port_of_nodes, shardid)
 
-
+# NodeParameters类，用于管理节点的配置信息
 class NodeParameters:
     def __init__(self, json):
         inputs = []
@@ -236,7 +248,7 @@ class NodeParameters:
         with open(filename, 'w') as f:
             dump(self.json, f, indent=4, sort_keys=True)
 
-
+# BenchParameters类，用于管理基准测试的配置参数
 class BenchParameters:
     def __init__(self, json):
         try:
@@ -305,7 +317,7 @@ class BenchParameters:
         if min(self.nodes) <= self.faults:
             raise ConfigError('There should be more nodes than faults')
 
-
+# PlotParameters类，用于处理绘图相关的参数
 class PlotParameters:
     def __init__(self, json):
         try:

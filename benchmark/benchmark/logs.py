@@ -24,6 +24,7 @@ class LogParser:
         self.res_state_MB = res_state_MB
 
         inputs = [primaries, workers]
+        # 判断inputs中的每一个x是否为list类型，所有元素都通过检查则返回true
         assert all(isinstance(x, list) for x in inputs)
         assert all(isinstance(x, str) for y in inputs for x in y)
         assert all(x for x in inputs)
@@ -33,21 +34,25 @@ class LogParser:
         self.total_txs = total_txs
         self.epoch = epoch
 
+        # 根据 faults 类型初始化分片委员会相关参数
         if isinstance(faults, int):
-            self.real_committee_size = len(primaries) / shard_nums
-            self.committee_size = int((len(primaries) + int(faults)) / shard_nums)
+            self.real_committee_size = len(primaries) / shard_nums # 真实委员会大小
+            self.committee_size = int((len(primaries) + int(faults)) / shard_nums) # 理论委员会大小
             self.shard_nums = shard_nums
             self.workers = len(workers) // len(primaries)
+        # 假如 faults 不是整数，用占位符表示未知值
         else:
             self.committee_size = '?'
             self.workers = '?'
 
         # Parse the clients logs.
         try:
+            # 多进程池解析客户端日志
             with Pool() as p:
                 results = p.map(self._parse_clients, clients)
         except (ValueError, IndexError, AttributeError) as e:
             raise ParseError(f'Failed to parse clients\' logs: {e}')
+        # 解包客户端日志解析结果，将这些元组的同一位置的元素组合成新的元组
         size, rate, self.start, misses, self.sent_samples, total_sent_txs \
             = zip(*results)
         self.size = size[0]
@@ -73,43 +78,49 @@ class LogParser:
             raise ParseError(f'Failed to parse workers\' logs: {e}')
         workers_ips, sizes, self.submitted_tx_nums, self.total_packaged_external_txs, self.received_samples, executed_txs, self.execution_end_t, self.total_general_txs, self.total_external_txs, self.total_cs_txs, self.total_commit_txs, self.total_aborted_txs, self.cache_storage_cost, append_delay, append_type = zip(*results) # batch
 
-
+        # 过滤并生成已提交批次的大小字典
         # sizes: ({batch.digest: batch size}, {}, {}, {})
         self.sizes = { # x is a dict, k is batch.digest, v is batch size
             k: v for x in sizes for k, v in x.items() if k in self.commits 
-        } # committed batch        
+        } # committed batch
+        # 判断主节点和工作节点是否共置
         # Determine whether the primary and the workers are collocated.
         self.collocate = set(primary_ips) == set(workers_ips)
 
+        # 计算打包的外部交易总数
         self.total_packaged_external_txs = int(sum(self.total_packaged_external_txs))
         # print("total_packaged_external_txs: ", self.total_packaged_external_txs)
-        
 
+        # 合并执行交易的结果数据
         self.executed_txs = self._merge_results([x.items() for x in executed_txs]) # {sample tx, execution timestamp}
 
-
+        # 限制缓存存储成本列表的长度为分片数
         self.cache_storage_cost = list(self.cache_storage_cost)[:self.shard_nums]
+        # 初始化缓存存储成本的统计值
         self.avg_avatar_cost = 0
         self.max_avatar_cost = 0
         avg_avatar_cost = []
         max_avatar_cost = []
+        # 遍历计算每个分片的平均和最大交易成本
         for tmp in self.cache_storage_cost:
           if len(tmp) != 0:
             avg_avatar_cost.append(mean(tmp))
             max_avatar_cost.append(max(tmp))
+        # 计算总体的平均和最大存储成本
         if len(avg_avatar_cost) != 0:
           self.avg_avatar_cost = mean(avg_avatar_cost)
           self.max_avatar_cost = max(max_avatar_cost)
         # print(self.avg_avatar_cost)
         # print(self.max_avatar_cost)
 
-
+        # 计算每种类型交易的总数（按委员会大小归一化）
         self.total_general_txs = int(sum(self.total_general_txs) / self.committee_size)
         self.total_external_txs = int(sum(self.total_external_txs) / self.committee_size)
         self.total_cs_txs = int(sum(self.total_cs_txs) / self.committee_size)
         self.total_commit_txs = int(sum(self.total_commit_txs) / self.committee_size)
         self.total_aborted_txs = int(sum(self.total_aborted_txs) / self.committee_size)
 
+        # 计算追加延迟的平均值
         # print("all append delay: ", append_delay)
         avg_delay = []
         for tmp in append_delay:
@@ -120,7 +131,8 @@ class LogParser:
           self.avg_csmsg_append_delay = mean(avg_delay)
         # print(avg_delay)
         # print(self.avg_csmsg_append_delay)
-        
+
+        # 设置追加类型
         self.append_type = append_type[0]
         
         # Check whether clients missed their target rate.
@@ -133,44 +145,54 @@ class LogParser:
         # Keep the earliest timestamp.
         merged = {}
         for x in input:
-            for k, v in x: # v is timestamp
+            for k, v in x: # k是批次标识，v是时间戳
                 if not k in merged or merged[k] > v:
                     merged[k] = v
         return merged
 
     def _parse_clients(self, log):
+        # 检查是否有 Error 关键字，有则说明客户端异常崩溃
         if search(r'Error', log) is not None:
             raise ParseError('Client(s) panicked')
 
+        # 提取交易大小和速率
         size = int(search(r'Transactions size: (\d+)', log).group(1)) 
         rate = int(search(r'Transactions rate: (\d+)', log).group(1))
 
+        # 提取日志中的启动时间，并转换为 POSIX 格式
         tmp = search(r'\[(.*Z) .* Start ', log).group(1)
         start = self._to_posix(tmp)
 
+        # 统计未达到目标速率的次数
         misses = len(findall(r'rate too high', log))
 
+        # 提取日志中所有采样交易的信息
         tmp = findall(r'\[(.*Z) .* sample transaction (\d+)', log)
         samples = {int(s): self._to_posix(t) for t, s in tmp} # all sample tx -> dict. samples = {sample_tx.counter: timestamp}
         total_sent_sample_txs = len(tmp)
 
+        # 提取采样间隔
         sample_interval = int(search(r'sample interval: one per (\d+) txs', log).group(1))
         total_sent_txs = total_sent_sample_txs * sample_interval
 
         return size, rate, start, misses, samples, total_sent_txs
 
     def _parse_primaries(self, log):
+        # 检查日志中是否有panicked或者error，如有则说明节点崩溃
         if search(r'(?:panicked|Error)', log) is not None:
             raise ParseError('Primary(s) panicked')
-
+        # 查找批次创建时间
         tmp = findall(r'\[(.*Z) .* Created B\d+\([^ ]+\) -> ([^ ]+=)', log)
         tmp = [(d, self._to_posix(t)) for t, d in tmp] # [(batch.digest, timestamp)]
+        # 合并所有的批次创建时间，返回最早的时间
         proposals = self._merge_results([tmp])
 
+        # 查找批次提交时间
         tmp = findall(r'\[(.*Z) .* Committed B\d+\([^ ]+\) -> ([^ ]+=)', log)
         tmp = [(d, self._to_posix(t)) for t, d in tmp] # [(batch.digest, timestamp)]
         commits = self._merge_results([tmp]) # The earliest time the transaction was submitted
 
+        # 提取配置项，使用正则表达式从日志中提取各个配置的数值
         configs = {
             'header_size': int(
                 search(r'Header size .* (\d+)', log).group(1)
@@ -195,15 +217,17 @@ class LogParser:
             ),
         }
 
+        # 提取节点创建的 ip 地址
         ip = search(r'booted on (\d+.\d+.\d+.\d+)', log).group(1)
 
         return proposals, commits, configs, ip
 
     def _parse_workers(self, log):
+        # 检查日志是否损坏或报错
         if search(r'(?:panic|Error)', log) is not None:
             raise ParseError('Worker(s) panicked')
 
-        ### params
+        # 提取工作节点的ip地址和附加类型
         ip = search(r'booted on (\d+.\d+.\d+.\d+)', log).group(1)
         append_type = search(r'append_type: ([^ ]+) ', log).group(1)
 
@@ -250,6 +274,7 @@ class LogParser:
         x = datetime.fromisoformat(string.replace('Z', '+00:00'))
         return datetime.timestamp(x)
 
+    # 计算bps（字节每秒）、tps（交易每秒）和duration（持续时间）
     def _consensus_throughput(self):
         if not self.commits:
             return 0, 0, 0
@@ -262,10 +287,12 @@ class LogParser:
         tps = total_committed_tx_nums / duration
         return tps, bps, duration
 
+    # 计算共识延迟
     def _consensus_latency(self): # the commit latency of batch
         latency = [c - self.proposals[d] for d, c in self.commits.items()] # commit_timestamp - proposal_timestamp
         return mean(latency) if latency else 0
 
+    # 计算端到端吞吐量
     def _end_to_end_throughput(self):
         if not self.commits: # no batch was committed
             return 0, 0, 0
@@ -280,6 +307,7 @@ class LogParser:
         tps = total_committed_tx_nums / duration
         return tps, bps, duration
 
+    # 计算端到端的延迟
     def _end_to_end_latency(self):
         latency = []
         for sent, received in zip(self.sent_samples, self.received_samples): # client - send, worker - received, primary - commit
@@ -291,6 +319,7 @@ class LogParser:
                     latency += [end - start] # the latency of a sample tx
         return mean(latency) if latency else 0
 
+    # 计算端到端执行吞吐量：执行的 TPS 和执行持续时间
     def _end_to_end_execution_throughput(self):
         if not self.commits:
             return 0, 0, 0
@@ -300,6 +329,7 @@ class LogParser:
         tps = self.total_commit_txs / exec_duration
         return tps, exec_duration
 
+    # 计算端到端执行延迟
     def _end_to_end_execution_latency(self):
         latency = []
         all_sent_sample_txs = {tx_id: t for res in self.sent_samples for tx_id, t in res.items()}
@@ -312,6 +342,7 @@ class LogParser:
           latency += [end - start] # the latency of a sample tx from issuing to being executed
         return mean(latency) if latency else 0, latency
 
+    # 汇总结果并格式化输出
     def result(self):
         header_size = self.configs[0]['header_size']
         max_header_delay = self.configs[0]['max_header_delay']
@@ -400,6 +431,7 @@ class LogParser:
             '-----------------------------------------\n'
         )
 
+    # 保存结果到文件
     def print(self, filename):
         assert isinstance(filename, str)
         with open(filename, 'a') as f: 
@@ -409,6 +441,7 @@ class LogParser:
             f.write(res)
             print('-----------------------------------------\n')
 
+    # 处理日志数据并返回 LogParser 实例
     @classmethod
     def process(cls, directory, epoch, shard_nums, faults, cs_faults, total_txs, duration, res_ledger_MB, res_state_MB):
         assert isinstance(directory, str)
