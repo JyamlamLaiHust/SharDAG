@@ -9,40 +9,44 @@ use config::{Import, ShardId};
 use crate::{Address};
 
 
-
+// 分片策略类型定义
 #[derive(TryFromPrimitive, Debug)]
 #[repr(usize)]
 pub enum Account2ShardType {
-  HashPolicy,
-  GraphPolicy,
+  HashPolicy, // 哈希分片策略
+  GraphPolicy, // 图分片策略
 }
 
+// 账户到分片映射的结构定义
 #[derive(Default, Clone, Serialize, Deserialize, Debug)]
 pub struct AccToShardItem {
-  pub account: String,
-  pub shard: ShardId,
+  pub account: String, // 账户地址
+  pub shard: ShardId, // 分片ID
 }
 
+// 活跃账户到分片映射定义
 #[derive(Default, Clone, Serialize, Deserialize, Debug)]
 pub struct ActAccToShardItem {
-  pub act_account: String,
-  pub shard: ShardId,
+  pub act_account: String, // 活跃账户地址
+  pub shard: ShardId, // 分片ID
 }
 
+// 分片策略接口定义
 pub trait Account2Shard {
-  fn get_shard_num(&self) -> ShardId;
-  fn get_shard(&self, addr: &Address) -> ShardId;
+  fn get_shard_num(&self) -> ShardId; // 获取分片总数
+  fn get_shard(&self, addr: &Address) -> ShardId; // 根据账户地址获取分片ID
 }
 
 
 #[derive(Clone, Deserialize, Debug, Default)]
 pub struct  Account2ShardHash {
-    pub shard_num: ShardId,
+    pub shard_num: ShardId, // 分片总数
 }
 
-impl Import for Account2ShardHash {}
+impl Import for Account2ShardHash {} // 实现 Import 特性（空实现）
 
 impl Account2ShardHash {
+    // 构造函数：初始化哈希策略的分片映射
     pub fn new(shard_num: ShardId) -> Self {
       info!("Initialize Account2ShardHash...");
       info!("Done...");
@@ -66,7 +70,7 @@ impl Account2Shard for Account2ShardHash {
   } 
 }
 
-
+// 基于图策略的账户到分片映射
 #[derive(Clone, Deserialize, Debug, Default)]
 pub struct  Account2ShardGraph {
     pub shard_num: ShardId,

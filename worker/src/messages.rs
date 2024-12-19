@@ -18,28 +18,30 @@ pub type Amount = f64;
 /// The message exchanged between workers from different shards.
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub enum GeneralTransaction {
-    TransferTx(Transaction), // original_tx or relayed_tx
-    AggTx(AggTransaction),
+    TransferTx(Transaction), // original_tx or relayed_tx 原始交易或转发交易
+    AggTx(AggTransaction), // 聚合交易
 }
 
 impl GeneralTransaction {
 
+  // 获取交易计数器
   pub fn get_counter(&self) -> u64 {
     match self {
-      GeneralTransaction::AggTx(_) => {0}
+      GeneralTransaction::AggTx(_) => {0} // 聚合交易没有计数器
       GeneralTransaction::TransferTx(tx) => {
         tx.counter
       }
     }
   }
 
+  // 判断是否为样本交易
   pub fn is_sample_tx(&self) -> bool {
       match self {
         GeneralTransaction::TransferTx(tx) => tx.sample == 0,
         _ => false,
       }
   }
-
+  // 设置门限签名
   pub fn set_thres_sig(&mut self, thres_sig: Signature, source_shard: ShardId) {
     match self {
       GeneralTransaction::TransferTx(tx) => tx.set_thres_sig(thres_sig, source_shard),
@@ -55,6 +57,7 @@ impl GeneralTransaction {
     }
   }
 
+  // 设置csmsg的序列号
   pub fn set_csmsg_seq(&mut self, csmsg_seq: u64) {
     match self {
       GeneralTransaction::TransferTx(tx) => tx.set_csmsg_sequence(csmsg_seq),
@@ -63,6 +66,7 @@ impl GeneralTransaction {
   }
 
 
+  // 获取交易的payload摘要
   pub  fn get_payload_digest(&self) -> Digest {
     match self {
       GeneralTransaction::TransferTx(tx) => tx.payload_hash.clone(),
@@ -70,6 +74,7 @@ impl GeneralTransaction {
     }
   }
 
+  // 计算打包的外部交易数
   pub fn count_packaged_external_tx(&self) -> u32 {
     match self {
       GeneralTransaction::TransferTx(tx) => tx.count_packaged_external_tx(),
@@ -77,6 +82,7 @@ impl GeneralTransaction {
     }
   }
 
+  // 计算外部交易数
   pub fn count_external_tx(&self) -> u32 {
     match self {
       GeneralTransaction::TransferTx(_) => 1,
@@ -140,7 +146,7 @@ impl GeneralTransaction {
 }
 
 
-
+// 原始交易数据
 #[derive(Default, Clone, Serialize, Deserialize, Debug)]
 pub struct RawTxOld {
   // pub block_number: usize,
@@ -150,7 +156,7 @@ pub struct RawTxOld {
   pub amount: Amount,
 }
 
-
+// 核心交易数据
 #[derive(Default, Clone, Serialize, Deserialize, Debug)]
 pub struct CoreTx {
   pub sample: u8, 
@@ -199,7 +205,7 @@ impl Hash for CoreTx {
 }
 
 
-
+// 聚合交易数据
 #[derive(Default, Clone, Serialize, Deserialize, Debug, PartialEq)]
 // rwsets executed by a shard 
 pub struct Frame {
@@ -297,7 +303,7 @@ impl fmt::Display for AggTransaction {
 }
 
 
-
+// 交易数据
 #[derive(Default, Clone, Serialize, Deserialize, Debug, PartialEq)]
 pub struct Transaction {
     pub sample: u8, // 0: sample tx; 1: Standard tx;

@@ -22,9 +22,11 @@ use crate::error::ExecutionResult;
 // pub mod processor_tests;
 
 /// Indicates a serialized `WorkerMessage::Batch` message.
+// 表示序列化后的 `WorkerMessage::Batch` 消息
 pub type SerializedBatchMessage = Vec<u8>;
 
 /// Hashes and stores batches, it then outputs the batch's digest.
+// 对批次进行哈希，并存储批次信息，最后输出批次的摘要
 pub struct Processor {
   id: WorkerId,
   nodeid: NodeId,
@@ -107,7 +109,7 @@ impl Processor {
               .expect("Failed to send digest");
       }
     }
-
+    // 监控 CSMsg 的追加，并根据验证结果更新存储
     async fn monitor_csmsg_appending(&mut self, batch:SerializedBatchMessage) -> ExecutionResult<bool> {
         // deserialized batch
         let msg = bincode::deserialize(&batch)?;

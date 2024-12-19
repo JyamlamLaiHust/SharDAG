@@ -13,15 +13,17 @@ pub const TIMER_RESOLUTION: u64 = 2500; // ms
 pub const SAMPLE_CSMSG_DUR: usize = 100; // sample csmsg appending delay every 100 csmsgs
 pub const OPTAPPEDNING: usize = 2; // 2 nodes in opt appending
 
+// 定义追加消息的类型
 #[derive(TryFromPrimitive, Debug)]
 #[repr(usize)]
 pub enum AppendType {
-  DualMode, 
-  Serial, 
+  DualMode, //双模式追加
+  Serial, //串行追加
 }
 
+// 用于验证跨分片消息的有效性，并处理验证后的消息
 pub struct CSMsgVerifier {
-    rx_cross_shard_msg: Receiver<CSMsg>,
+    rx_cross_shard_msg: Receiver<CSMsg>, // 接受跨分片消息的通道
     tx_batch_maker: Sender<GeneralTransaction>,
     all_committees: Committees,
 
@@ -67,6 +69,7 @@ impl CSMsgVerifier {
     }
 
     /// Main loop listening to the messages.
+    // 主循环：监听跨分片消息并进行验证
     async fn run(&mut self) {
       info!(
         "CrossShardMsgVer-DualMode is running!"
@@ -92,6 +95,7 @@ impl CSMsgVerifier {
       }
     }
 
+    // 处理验证通过的 CSMsg
     async fn process_msg(
       &mut self,
       csmsg: CSMsg,
@@ -115,7 +119,7 @@ impl CSMsgVerifier {
                 // update intact_sig of inner_tx
                 inner_tx.set_thres_sig(intact_sig, csmsg.source_shard);
 
-                // append csmsg to DAG ledger
+                // 追加消息到 DAG
                 let msg_num = self.sampled_csmsg_num;
                 self.sampled_csmsg_num += 1;
                 let tx_batch_maker_pes = self.tx_batch_maker.clone();
@@ -143,6 +147,7 @@ impl CSMsgVerifier {
     }
 }
 
+// 追加 CSMsg 消息
 async fn append_msg(
   tx_batch_maker: Sender<GeneralTransaction>,
   mut csmsg_store: CSMsgStore,

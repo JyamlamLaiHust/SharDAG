@@ -12,6 +12,7 @@ use tokio::sync::mpsc::Receiver;
 // pub mod helper_tests;
 
 /// A task dedicated to help other authorities by replying to their batch requests.
+// 一个帮助其他节点的任务，负责回复他们的批处理请求
 pub struct Helper {
     /// The id of this worker.
     id: WorkerId,
@@ -25,6 +26,7 @@ pub struct Helper {
     network: SimpleSender,
 }
 
+// 启动一个新的 Helper 任务，异步处理批处理请求
 impl Helper {
     pub fn spawn(
         id: WorkerId,
@@ -45,6 +47,7 @@ impl Helper {
         });
     }
 
+    // Helper 任务的主循环，持续接收请求并处理。
     async fn run(&mut self) {
         while let Some((digests, origin)) = self.rx_request.recv().await {
             // TODO [issue #7]: Do some accounting to prevent bad nodes from monopolizing our resources.

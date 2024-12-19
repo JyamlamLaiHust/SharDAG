@@ -9,6 +9,7 @@ use store::Store;
 use tokio::sync::mpsc::Receiver;
 
 /// A task dedicated to help other authorities by replying to their certificates requests.
+// 一个专门用于帮助其他节点，通过恢复它们的证书请求的任务
 pub struct Helper {
     /// The committee information.
     committee: Committee,
@@ -21,6 +22,7 @@ pub struct Helper {
 }
 
 impl Helper {
+    // 创建并启动 Helper 任务
     pub fn spawn(
         committee: Committee,
         store: Store,
@@ -41,8 +43,8 @@ impl Helper {
     async fn run(&mut self) {
         while let Some((digests, origin)) = self.rx_primaries.recv().await {
             // TODO [issue #195]: Do some accounting to prevent bad nodes from monopolizing our resources.
-
-            // get the requestors address.
+            // 添加防护机制，避免恶意节点独占资源。
+            // get the requestors address. 获取请求者的网络地址
             let address = match self.committee.primary(&origin) {
                 Ok(x) => x.primary_to_primary,
                 Err(e) => {
@@ -52,6 +54,7 @@ impl Helper {
             };
 
             // Reply to the request (the best we can).
+            // 尽可能回复请求
             for digest in digests {
                 match self.store.read(digest.to_vec()).await {
                     Ok(Some(data)) => {

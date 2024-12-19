@@ -12,7 +12,7 @@ use tokio::time::Instant;
 
 
 pub struct CSMsgVerifierSerial {
-    rx_cross_shard_msg: Receiver<CSMsg>,
+    rx_cross_shard_msg: Receiver<CSMsg>, // 接受跨分片消息的通道
     tx_batch_maker: Sender<GeneralTransaction>,
     all_committees: Committees,
 

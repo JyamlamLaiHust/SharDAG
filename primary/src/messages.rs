@@ -10,6 +10,7 @@ use std::collections::{BTreeMap, BTreeSet, HashSet};
 use std::convert::TryInto;
 use std::fmt;
 
+// 定义区块头（Header）结构体
 #[derive(Clone, Serialize, Deserialize, Default)]
 pub struct Header {
     pub author: PublicKey,
@@ -21,6 +22,7 @@ pub struct Header {
 }
 
 impl Header {
+    // 创建一个新的 Header
     pub async fn new(
         author: PublicKey,
         round: Round,
@@ -36,8 +38,8 @@ impl Header {
             id: Digest::default(),
             signature: Signature::default(),
         };
-        let id = header.digest();
-        let signature = signature_service.request_signature(id.clone()).await;
+        let id = header.digest(); // 计算区块头的摘要
+        let signature = signature_service.request_signature(id.clone()).await; // 生成签名
         Self {
             id,
             signature,
@@ -45,15 +47,19 @@ impl Header {
         }
     }
 
+    // 验证区块头的合法性
     pub fn verify(&self, committee: &Committee) -> DagResult<()> {
         // Ensure the header id is well formed.
+        // 验证区块头的 ID 是否正确
         ensure!(self.digest() == self.id, DagError::InvalidHeaderId);
 
         // Ensure the authority has voting rights.
+        // 验证创建者是否具有投票权
         let voting_rights = committee.stake(&self.author);
         ensure!(voting_rights > 0, DagError::UnknownAuthority(self.author));
 
         // Ensure all worker ids are correct.
+        // 验证所有的工作者 ID 是否正确
         for worker_id in self.payload.values() {
             committee
                 .worker(&self.author, worker_id)
@@ -61,6 +67,7 @@ impl Header {
         }
 
         // Check the signature.
+        // 验证签名
         self.signature
             .verify(&self.id, &self.author)
             .map_err(DagError::from)
@@ -75,6 +82,7 @@ impl Header {
 }
 
 impl Hash for Header {
+    // 计算区块头的摘要
     fn digest(&self) -> Digest {
         let mut hasher = Sha512::new();
         hasher.update(&self.author);
@@ -90,7 +98,7 @@ impl Hash for Header {
     }
 }
 
-/// {:?}
+/// {:?} 调试输出格式
 /// TJrdkyDxd3Y/zQ8Q: B32(wO4j22wkghgVa7FH, 32)
 impl fmt::Debug for Header {
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
@@ -105,7 +113,7 @@ impl fmt::Debug for Header {
     }
 }
 
-/// {}
+/// {} 简单输出格式
 /// e.g.: B32(wO4j22wkghgVa7FH)
 impl fmt::Display for Header {
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
@@ -113,6 +121,7 @@ impl fmt::Display for Header {
     }
 }
 
+// 定义投票 结构体
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Vote {
     pub id: Digest,
@@ -122,6 +131,7 @@ pub struct Vote {
     pub signature: Signature,
 }
 
+// 创建一个新的投票
 impl Vote {
     pub async fn new(
         header: &Header,

@@ -6,6 +6,8 @@ use tokio::sync::mpsc::Receiver;
 
 /// Receives batches' digests of other authorities. These are only needed to verify incoming
 /// headers (ie. make sure we have their payload).
+/// 接收其他节点的批处理摘要。
+/// 这些摘要仅用于验证传入的区块头（即确保我们拥有其负载）。
 pub struct PayloadReceiver {
     /// The persistent storage.
     store: Store,

@@ -16,14 +16,18 @@ use tokio::sync::oneshot;
 
 
 /// Resolution of the timer managing retrials of sync requests (in ms).
+// 管理同步请求重试的间隔时间（单位：毫秒）
 const TIMER_RESOLUTION: u64 = 1_000;
+// 定义存储操作结果的返回类型
 pub type StoreResult<T> = Result<T, StoreError>;
 
+// 定义 MissingBatchFetcher 的支持命令
 pub enum MissingBatchFetcherrCommand { 
-  // digests, target
+  // digests, target 接受缺失批次的摘要列表、目标节点和回调通道
   FetchMissingBatches(Vec<Digest>, PublicKey, oneshot::Sender<StoreResult<bool>>), // called by TxConvertor
 }
 
+// 管理和获取缺失的批次
 #[derive(Clone)]
 pub struct MissingBatchFetcher {
     channel: Sender<MissingBatchFetcherrCommand>,
@@ -33,18 +37,21 @@ pub struct MissingBatchFetcher {
 impl MissingBatchFetcher {
     /// Helper function. It waits for a batch to become available in the storage
     /// and then delivers its digest.
+    // 辅助函数：等待某个批次在存储中可用，并返回其摘要
     async fn waiter(
-      missing: Digest,
-      mut store: Store,
-      deliver: Digest,
+      missing: Digest, // 缺失的批次摘要
+      mut store: Store, // 存储对象，用于检查批次是否可用
+      deliver: Digest, // 需要返回的摘要
     ) -> Result<Digest, StoreError> {
+        // 使用 select 监听存储的通知，确认批次可用
         tokio::select! {
             result = store.notify_read(missing.to_vec()) => {
-                result.map(|_| deliver)
+                result.map(|_| deliver) // 如果批次可用，返回对应的摘要
             }
         }
     }
 
+  // 构造函数
   pub fn new(
     name: PublicKey,
     id: WorkerId,
@@ -59,7 +66,7 @@ impl MissingBatchFetcher {
     let mut waiting = FuturesUnordered::new(); // A set of futures which may complete in any order.
 
     let (tx, mut rx) = channel(100);
-
+      // 启动异步任务，用于处理接收到的命令
       tokio::spawn(async move {
           while let Some(command) = rx.recv().await {
               match command {
@@ -154,6 +161,7 @@ impl MissingBatchFetcher {
       Self { channel: tx }
   }
 
+  // 请求获取缺失的批次
   pub async fn fetch_missing_batches(&mut self, digests: Vec<Digest>, target: PublicKey) -> StoreResult<bool> {
     let (sender, receiver) = oneshot::channel();
     if let Err(e) = self

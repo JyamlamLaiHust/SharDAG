@@ -13,21 +13,27 @@ use tokio::sync::mpsc::{Receiver, Sender};
 pub mod consensus_tests;
 
 /// The representation of the DAG in memory.
+// 内存中 DAG 的表示形式
 type Dag = HashMap<Round, HashMap<PublicKey, (Digest, Certificate)>>;
 
 /// The state that needs to be persisted for crash-recovery.
+// 用于崩溃恢复的状态持久化结构体
 struct State {
     /// The last committed round.
+    // 上次提交的轮次
     last_committed_round: Round,
     // Keeps the last committed round for each authority. This map is used to clean up the dag and
     // ensure we don't commit twice the same certificate.
+    // 保存每个节点上次提交的轮次，此映射用于清理 DAG，并确保不会提交相同的证书
     last_committed: HashMap<PublicKey, Round>,
     /// Keeps the latest committed certificate (and its parents) for every authority. Anything older
     /// must be regularly cleaned up through the function `update`.
+    // 保存每个节点最新的提交证书及其父证书，就数据通过 'update' 定期清理
     dag: Dag,
 }
 
 impl State {
+    // 初始化状态，使用创世证书
     fn new(genesis: Vec<Certificate>) -> Self {
         let genesis = genesis
             .into_iter()
@@ -42,6 +48,7 @@ impl State {
     }
 
     /// Update and clean up internal state base on committed certificates.
+    // 根据提交的证书更新并清理内部状态
     fn update(&mut self, certificate: &Certificate, gc_depth: Round) {
         self.last_committed
             .entry(certificate.origin())
@@ -60,25 +67,33 @@ impl State {
     }
 }
 
+// 共识模块
 pub struct Consensus {
     /// The committee information.
+    // 委员会信息
     committee: Committee,
     /// The depth of the garbage collector.
+    // 垃圾回收的深度
     gc_depth: Round,
 
     /// Receives new certificates from the primary. The primary should send us new certificates only
     /// if it already sent us its whole history.
+    // 接收来自主节点的新证书
     rx_primary: Receiver<Certificate>,
     /// Outputs the sequence of ordered certificates to the primary (for cleanup and feedback).
+    // 输出已排序的证书到主节点
     tx_primary: Sender<Certificate>,
     /// Outputs the sequence of ordered certificates to the application layer.
+    // 输出已排序的证书到应用层
     tx_output: Sender<Certificate>,
 
     /// The genesis certificates.
+    // 创世证书
     genesis: Vec<Certificate>,
 }
 
 impl Consensus {
+    // 启动共识模块
     pub fn spawn(
         committee: Committee,
         gc_depth: Round,
@@ -102,14 +117,17 @@ impl Consensus {
 
     async fn run(&mut self) {
         // The consensus state (everything else is immutable).
+        // 初始化共识状态
         let mut state = State::new(self.genesis.clone());
 
         // Listen to incoming certificates.
+        // 监听主节点发送的证书
         while let Some(certificate) = self.rx_primary.recv().await {
             debug!("Processing {:?}", certificate);
             let round = certificate.round();
 
             // Add the new certificate to the local storage.
+            // 将证书添加到本地存储
             state
                 .dag
                 .entry(round)
@@ -118,8 +136,10 @@ impl Consensus {
 
             // Try to order the dag to commit. Start from the highest round for which we have at least
             // 2f+1 certificates. This is because we need them to reveal the common coin.
+            // 从最高轮次开始尝试 DAG 并提交
             let r = round - 1;
 
+            // 仅为偶数轮次选举领导者
             // We only elect leaders for even round numbers.
             if r % 2 != 0 || r < 4 {
                 continue;
@@ -127,6 +147,7 @@ impl Consensus {
 
             // Get the certificate's digest of the leader of round r-2. If we already ordered this leader,
             // there is nothing to do.
+            // 获取 r-2 轮次的领导者证书摘要，如果已提交此领导者，则无需处理
             let leader_round = r - 2;
             if leader_round <= state.last_committed_round {
                 continue;

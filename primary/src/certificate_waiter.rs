@@ -10,6 +10,7 @@ use tokio::sync::mpsc::{Receiver, Sender};
 
 /// Waits to receive all the ancestors of a certificate before looping it back to the `Core`
 /// for further processing.
+// 该结构体负责等待证书的所有祖先都存储完毕，然后将证书发送会'core'
 pub struct CertificateWaiter {
     /// The persistent storage.
     store: Store,
@@ -20,6 +21,7 @@ pub struct CertificateWaiter {
 }
 
 impl CertificateWaiter {
+    // 启动 'CertificateWaiter' 的异步任务
     pub fn spawn(
         store: Store,
         rx_synchronizer: Receiver<Certificate>,
@@ -38,6 +40,7 @@ impl CertificateWaiter {
 
     /// Helper function. It waits for particular data to become available in the storage
     /// and then delivers the specified header.
+    // 辅助函数：等待特定数据存储完成，然后交付指定的证书。
     async fn waiter(
         mut missing: Vec<(Vec<u8>, Store)>,
         deliver: Certificate,
@@ -53,6 +56,7 @@ impl CertificateWaiter {
             .map_err(DagError::from)
     }
 
+    // 主循环，持续处理来自同步器的证书，并等待其依赖的数据存储完成。
     async fn run(&mut self) {
         let mut waiting = FuturesUnordered::new();
 

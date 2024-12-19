@@ -6,6 +6,7 @@ use std::net::SocketAddr;
 use tokio::sync::mpsc::Receiver;
 
 // Send batches' digests to the primary.
+// 该结构体用于将批次的摘要信息发送到主节点
 pub struct PrimaryConnector {
     /// The primary network address.
     primary_address: SocketAddr,
@@ -15,6 +16,7 @@ pub struct PrimaryConnector {
     network: SimpleSender,
 }
 
+// 接收摘要并将其发送到主节点
 impl PrimaryConnector {
     pub fn spawn(primary_address: SocketAddr, rx_digest: Receiver<SerializedBatchDigestMessage>) {
         tokio::spawn(async move {
@@ -28,6 +30,7 @@ impl PrimaryConnector {
         });
     }
 
+    // 处理接收到的摘要，并通过网络发送到主节点
     async fn run(&mut self) {
         while let Some(digest) = self.rx_digest.recv().await {
             // Send the digest through the network.

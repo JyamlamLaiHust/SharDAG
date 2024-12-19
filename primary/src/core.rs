@@ -21,6 +21,7 @@ use tokio::sync::mpsc::{Receiver, Sender};
 #[path = "tests/core_tests.rs"]
 pub mod core_tests;
 
+// 核心模块，管理主要逻辑流程，如处理头部、投票和证书
 pub struct Core {
     /// The public key of this primary.
     name: PublicKey,
@@ -114,12 +115,14 @@ impl Core {
         });
     }
 
+    // 处理自己的头部逻辑。
     async fn process_own_header(&mut self, header: Header) -> DagResult<()> {
         // Reset the votes aggregator.
         self.current_header = header.clone();
         self.votes_aggregator = VotesAggregator::new();
 
         // Broadcast the new header in a reliable manner.
+        // 以可靠的方式广播新头部。
         let addresses = self
             .committee
             .others_primaries(&self.name)
@@ -138,10 +141,12 @@ impl Core {
         self.process_header(&header).await
     }
 
+    // 处理接收到的头部
     #[async_recursion]
     async fn process_header(&mut self, header: &Header) -> DagResult<()> {
         debug!("Processing {:?}", header);
         // Indicate that we are processing this header.
+        // 标记此头部正在处理
         self.processing
             .entry(header.round)
             .or_insert_with(HashSet::new)
@@ -150,6 +155,7 @@ impl Core {
         // Ensure we have the parents. If at least one parent is missing, the synchronizer returns an empty
         // vector; it will gather the missing parents (as well as all ancestors) from other nodes and then
         // reschedule processing of this header.
+        // 确保拥有所有父证书
         let parents = self.synchronizer.get_parents(header).await?;
         if parents.is_empty() {
             debug!("Processing of {} suspended: missing parent(s)", header.id);
@@ -157,6 +163,7 @@ impl Core {
         }
 
         // Check the parent certificates. Ensure the parents form a quorum and are all from the previous round.
+        // 验证父证书
         let mut stake = 0;
         for x in parents {
             ensure!(
@@ -170,6 +177,7 @@ impl Core {
             DagError::HeaderRequiresQuorum(header.id.clone())
         );
 
+        // 确保拥有所有负载数据
         // Ensure we have the payload. If we don't, the synchronizer will ask our workers to get it, and then
         // reschedule processing of this header once we have it.
         if self.synchronizer.missing_payload(header).await? {
@@ -213,11 +221,13 @@ impl Core {
         Ok(())
     }
 
+    // 处理接收到的投票
     #[async_recursion]
     async fn process_vote(&mut self, vote: Vote) -> DagResult<()> {
         debug!("Processing {:?}", vote);
 
         // Add it to the votes' aggregator and try to make a new certificate.
+        // 将投票添加到聚合器并尝试生成新证书
         if let Some(certificate) =
             self.votes_aggregator
                 .append(vote, &self.committee, &self.current_header)?
@@ -225,6 +235,7 @@ impl Core {
             debug!("Assembled {:?}", certificate);
 
             // Broadcast the certificate.
+            // 广播新证书
             let addresses = self
                 .committee
                 .others_primaries(&self.name)
@@ -240,6 +251,7 @@ impl Core {
                 .extend(handlers);
 
             // Process the new certificate.
+            // 处理新证书
             self.process_certificate(certificate)
                 .await
                 .expect("Failed to process valid certificate");
@@ -247,6 +259,7 @@ impl Core {
         Ok(())
     }
 
+    // 处理接收到的证书
     #[async_recursion]
     async fn process_certificate(&mut self, certificate: Certificate) -> DagResult<()> {
         debug!("Processing {:?}", certificate);
@@ -255,6 +268,7 @@ impl Core {
         // voted, it means we already processed it). Since this header got certified, we are sure that all
         // the data it refers to (ie. its payload and its parents) are available. We can thus continue the
         // processing of the certificate even if we don't have them in store right now.
+        // 如果尚未对证书嵌入的头部投票，则处理该头部。
         if !self
             .processing
             .get(&certificate.header.round)
@@ -266,6 +280,7 @@ impl Core {
 
         // Ensure we have all the ancestors of this certificate yet. If we don't, the synchronizer will gather
         // them and trigger re-processing of this certificate.
+        // 确保拥有所有祖先证书
         if !self.synchronizer.deliver_certificate(&certificate).await? {
             debug!(
                 "Processing of {:?} suspended: missing ancestors",
@@ -275,10 +290,12 @@ impl Core {
         }
 
         // Store the certificate.
+        // 将证书存储到持久化存储中
         let bytes = bincode::serialize(&certificate).expect("Failed to serialize certificate");
         self.store.write(certificate.digest().to_vec(), bytes).await;
 
         // Check if we have enough certificates to enter a new dag round and propose a header.
+        // 检查是否可以进入新DAG轮次并提议头部
         if let Some(parents) = self
             .certificates_aggregators
             .entry(certificate.round())
@@ -286,6 +303,7 @@ impl Core {
             .append(certificate.clone(), &self.committee)?
         {
             // Send it to the `Proposer`.
+            // 将结果发送给 Proposer
             self.tx_proposer
                 .send((parents, certificate.round()))
                 .await
@@ -293,6 +311,7 @@ impl Core {
         }
 
         // Send it to the consensus layer.
+        // 将证书发送给共识层
         let id = certificate.header.id.clone();
         if let Err(e) = self.tx_consensus.send(certificate).await {
             warn!(
@@ -303,6 +322,7 @@ impl Core {
         Ok(())
     }
 
+    // 校验头部是否合法
     fn sanitize_header(&mut self, header: &Header) -> DagResult<()> {
         ensure!(
             self.gc_round <= header.round,
@@ -310,6 +330,7 @@ impl Core {
         );
 
         // Verify the header's signature.
+        // 验证头部签名
         header.verify(&self.committee)?;
 
         // TODO [issue #3]: Prevent bad nodes from sending junk headers with high round numbers.
@@ -317,6 +338,7 @@ impl Core {
         Ok(())
     }
 
+    // 验证投票是否合法
     fn sanitize_vote(&mut self, vote: &Vote) -> DagResult<()> {
         ensure!(
             self.current_header.round <= vote.round,
@@ -335,6 +357,7 @@ impl Core {
         vote.verify(&self.committee).map_err(DagError::from)
     }
 
+    // 证书是否合法
     fn sanitize_certificate(&mut self, certificate: &Certificate) -> DagResult<()> {
         ensure!(
             self.gc_round <= certificate.round(),
@@ -346,12 +369,15 @@ impl Core {
     }
 
     // Main loop listening to incoming messages.
+    // 监听消息
     pub async fn run(&mut self) {
         loop {
             let result = tokio::select! {
                 // We receive here messages from other primaries.
+                // 接收来自其他主节点的消息
                 Some(message) = self.rx_primaries.recv() => {
                     match message {
+                        // 处理 Header 类型消息
                         PrimaryMessage::Header(header) => {
                             match self.sanitize_header(&header) {
                                 Ok(()) => self.process_header(&header).await,
@@ -359,34 +385,43 @@ impl Core {
                             }
 
                         },
+                        // 处理 Vote 类型消息
                         PrimaryMessage::Vote(vote) => {
                             match self.sanitize_vote(&vote) {
                                 Ok(()) => self.process_vote(vote).await,
                                 error => error
                             }
                         },
+                        // 处理 Certificate 类型消息
                         PrimaryMessage::Certificate(certificate) => {
                             match self.sanitize_certificate(&certificate) {
                                 Ok(()) =>  self.process_certificate(certificate).await,
                                 error => error
                             }
                         },
+                        // 处理意外的消息类型
                         _ => panic!("Unexpected core message")
                     }
                 },
 
                 // We receive here loopback headers from the `HeaderWaiter`. Those are headers for which we interrupted
                 // execution (we were missing some of their dependencies) and we are now ready to resume processing.
+                // 接收来自 `HeaderWaiter` 的回环 Header。这些 Header 是因为依赖项缺失而中断的，
+                // 现在可以继续处理。
                 Some(header) = self.rx_header_waiter.recv() => self.process_header(&header).await,
 
                 // We receive here loopback certificates from the `CertificateWaiter`. Those are certificates for which
                 // we interrupted execution (we were missing some of their ancestors) and we are now ready to resume
                 // processing.
+                // 接收来自 `CertificateWaiter` 的回环 Certificate。这些 Certificate 是因为其祖先缺失
+                // 而中断的，现在可以继续处理。
                 Some(certificate) = self.rx_certificate_waiter.recv() => self.process_certificate(certificate).await,
 
                 // We also receive here our new headers created by the `Proposer`.
+                // 接收来自 `Proposer` 的新 Header。
                 Some(header) = self.rx_proposer.recv() => self.process_own_header(header).await,
             };
+            // 根据处理结果执行后续操作
             match result {
                 Ok(()) => (),
                 Err(DagError::StoreError(e)) => {
@@ -398,6 +433,7 @@ impl Core {
             }
 
             // Cleanup internal state.
+            // 清理内部状态
             let round = self.consensus_round.load(Ordering::Relaxed);
             if round > self.gc_depth {
                 let gc_round = round - self.gc_depth;

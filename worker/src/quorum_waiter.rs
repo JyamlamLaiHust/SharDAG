@@ -12,6 +12,7 @@ use tokio::sync::mpsc::{Receiver, Sender};
 // pub mod quorum_waiter_tests;
 
 #[derive(Debug)]
+// 表示一个等待达到法定人数的消息
 pub struct QuorumWaiterMessage {
     /// A serialized `WorkerMessage::Batch` message.
     pub batch: SerializedBatchMessage,
@@ -57,7 +58,7 @@ impl QuorumWaiter {
         deliver
     }
 
-    /// Main loop.
+    /// Main loop，等待 2f 个节点的确认
     async fn run(&mut self) {
         while let Some(QuorumWaiterMessage { batch, handlers }) = self.rx_message.recv().await {
             let mut wait_for_quorum: FuturesUnordered<_> = handlers

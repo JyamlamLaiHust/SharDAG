@@ -1,6 +1,9 @@
+// 导入外部库
 use std::convert::TryFrom;
 use anyhow::{Context, Result};
 use clap::{crate_name, crate_version, App, AppSettings, ArgMatches, SubCommand};
+
+// 导入自定义库
 use config::Export as _;
 use config::Import as _;
 use config::{Committees, KeyPair, Parameters, WorkerId, ShardId};
@@ -20,26 +23,30 @@ use worker::StateStoreType;
 use worker::new_primary_store;
 use worker::Worker;
 
+// 导入自定义模块
 mod benchmark_client;
 mod test_migration;
 mod test_execution;
-/// The default channel capacity.
+
+/// 定义默认通道容量，用于限制异步消息通道的队列大小
 pub const CHANNEL_CAPACITY: usize = 1_000;
 
-
-
+// 使用 tokio 的异步入口，当出现错误时主函数返回 Result 类型处理潜在错误
 #[tokio::main]
 async fn main() -> Result<()> {
+    //
     let matches = App::new(crate_name!())
         .version(crate_version!())
         .about("A research implementation of Narwhal and Tusk.")
         .args_from_usage("-v... 'Sets the level of verbosity'")
         .subcommand(
+            // 生成新的密钥对并输出到指定文件
             SubCommand::with_name("generate_keys")
                 .about("Print a fresh key pair to file")
                 .args_from_usage("--filename=<FILE> 'The file where to print the new key pair'"),
         )
         .subcommand(
+            // 启动一个节点，分为 primary 和 worker 两种模式
             SubCommand::with_name("run")
                 .about("Run a node")
                 .args_from_usage("--keys=<FILE> 'The file containing the node keys'")
@@ -68,6 +75,7 @@ async fn main() -> Result<()> {
         .setting(AppSettings::SubcommandRequiredElseHelp)
         .get_matches();
 
+    // 根据命令行的 -v 设置日志级别
     let log_level = match matches.occurrences_of("v") {
         0 => "error",
         1 => "warn",
@@ -75,33 +83,40 @@ async fn main() -> Result<()> {
         3 => "debug",
         _ => "trace",
     };
+    // 初始化时间戳
     let mut logger = env_logger::Builder::from_env(Env::default().default_filter_or(log_level));
     #[cfg(feature = "benchmark")]
     logger.format_timestamp_millis();
     logger.init();
 
+    // 处理子命令
     match matches.subcommand() {
+        // 创建密钥对并保存到文件中
         ("generate_keys", Some(sub_matches)) => KeyPair::new()
             .export(sub_matches.value_of("filename").unwrap())
             .context("Failed to generate key pair")?,
+        // 调用 run 函数，启动节点逻辑
         ("run", Some(sub_matches)) => run(sub_matches).await?,
         _ => unreachable!(),
     }
     Ok(())
 }
 
+// run 函数细节
 // Runs either a worker or a primary.
 async fn run(matches: &ArgMatches<'_>) -> Result<()> {
+    // 读取密钥文件、委员会信息和存储路径
     let key_file = matches.value_of("keys").unwrap();
     let committee_file = matches.value_of("committee").unwrap();
     let parameters_file = matches.value_of("parameters");
     let store_path = matches.value_of("store").unwrap();
 
-
+    // 解析分片编号
     let shard_id = matches.value_of("shardid").unwrap()
                 .parse::<ShardId>()
                 .context("The shard id must be a positive integer")?;
 
+    // 加载密钥和委员会信息
     // Read the node's keypair from file.
     let keypair = KeyPair::import(key_file).context("Failed to load the node's keypair")?; 
 
@@ -129,6 +144,7 @@ async fn run(matches: &ArgMatches<'_>) -> Result<()> {
 
     // Check whether to run a primary, a worker, or an entire authority.
     match matches.subcommand() {
+        // 启动主节点和共识模块
         // Spawn the primary and consensus core.
         ("primary", _) => {
             let (tx_new_certificates, rx_new_certificates) = channel(CHANNEL_CAPACITY);
@@ -150,6 +166,7 @@ async fn run(matches: &ArgMatches<'_>) -> Result<()> {
             );
         }
 
+        // 启动工作节点，负责分片相关任务
         // Spawn a single worker.
         ("worker", Some(sub_matches)) => {
             let id = sub_matches
@@ -250,6 +267,7 @@ async fn run(matches: &ArgMatches<'_>) -> Result<()> {
         _ => unreachable!(),
     } 
 
+    // 分析共识输出
     // Analyze the consensus' output.
     analyze(rx_output).await;
 

@@ -235,11 +235,12 @@ pub fn rawtx2tx(
   CoreTx::new(tx_sample, tx_counter, sender, receiver, raw_tx_old.amount, payload)
 }
 
-
+// 将原始交易转换为核心交易
 pub fn rawtx2simpletx(
   raw_tx_old: RawTxOld,
   tx_sample: u8, 
   tx_counter: u64,
+  // 采用分片策略
   acc_shard: Arc<dyn Account2Shard + Send>,
 ) -> (Transaction, ShardId)  {
   // convert rawtx to simple tx

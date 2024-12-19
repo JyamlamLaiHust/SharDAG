@@ -8,10 +8,8 @@ use std::convert::TryFrom;
 use std::net::SocketAddr;
 use client::{CommonClientMultiTxSenderPerNode, BrokerClientMultiTxSenderPerNode};
 
-
+// 定义常量，表示事务的持续时间
 const SEND_TX_DURATION_MS: u32 = 6000000; // ms 
-
-
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -33,11 +31,13 @@ async fn main() -> Result<()> {
         .setting(AppSettings::ArgRequiredElseHelp)
         .get_matches();
 
+    // 设置日志级别为'info'，并配置时间戳格式
     env_logger::Builder::from_env(Env::default().default_filter_or("info"))
         .format_timestamp_millis()
         .init();
 
 
+    // 解析参数
     let size = matches
         .value_of("size")
         .unwrap()
@@ -98,6 +98,7 @@ async fn main() -> Result<()> {
     let shard_num = committees.shard_num;
     let shard_size = committees.shard_size;
 
+    // 记录重要参数和配置日志
     info!("Epoch: {:?}, total txs: {:?}", epoch, totaltxs);
     info!("workload file: {:?}", workload_file);
     info!("acc2shard file: {:?}", acc2shard_file);
@@ -110,6 +111,7 @@ async fn main() -> Result<()> {
     info!("client_addr: {:?}", client_addr);
     info!("wait nodes: {:?}", nodes);
 
+    // 根据 executor_type 来创建客户端
     // create new client: a common client or broker client according to params
     match executor_type {
       ExecutorType::BrokerChain => {

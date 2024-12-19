@@ -5,10 +5,10 @@ use std::fs;
 #[tokio::test]
 async fn create_store() {
     // Create new store.
-    let path = ".db_test_create_store";
-    let _ = fs::remove_dir_all(path);
-    let store = Store::new(path);
-    assert!(store.is_ok());
+    let path = ".db_test_create_store";  // 定义存储路径
+    let _ = fs::remove_dir_all(path); // 确保路径不存在，删除任何现有数据
+    let store = Store::new(path); // 创建存储实例
+    assert!(store.is_ok()); // 验证存储实例创建完成
 }
 
 #[tokio::test]
@@ -19,16 +19,18 @@ async fn read_write_value() {
     let mut store = Store::new(path).unwrap();
 
     // Write value to the store.
+    // 向存储写入一个键值对
     let key = vec![0u8, 1u8, 2u8, 3u8];
     let value = vec![4u8, 5u8, 6u8, 7u8];
-    store.write(key.clone(), value.clone()).await;
+    store.write(key.clone(), value.clone()).await; // 异步写入键值对
 
     // Read value.
-    let result = store.read(key).await;
-    assert!(result.is_ok());
-    let read_value = result.unwrap();
-    assert!(read_value.is_some());
-    assert_eq!(read_value.unwrap(), value);
+    // 从存储读取值
+    let result = store.read(key).await; // 异步读取键对应的值
+    assert!(result.is_ok()); // 确保读取操作成功
+    let read_value = result.unwrap(); // 读取结果
+    assert!(read_value.is_some()); // 确保值存在
+    assert_eq!(read_value.unwrap(), value); // 验证读取值和写入值相等
 }
 
 #[tokio::test]
@@ -39,6 +41,7 @@ async fn read_unknown_key() {
     let mut store = Store::new(path).unwrap();
 
     // Try to read unknown key.
+    // 尝试读取一个不存在的值
     let key = vec![0u8, 1u8, 2u8, 3u8];
     let result = store.read(key).await;
     assert!(result.is_ok());
@@ -69,6 +72,7 @@ async fn read_notify() {
     });
 
     // Write the missing value and ensure the handle terminates correctly.
-    store.write(key, value).await;
+    // 写入缺失的值并确保任务正确终止
+    store.write(key, value).await; //异步写入键值对
     assert!(handle.await.is_ok());
 }

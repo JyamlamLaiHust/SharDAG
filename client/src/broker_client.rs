@@ -24,6 +24,7 @@ use crate::tx1_processor::Tx1Processor;
 use crate::tx1_verifier::Tx1Verifier;
 
 /// The default channel capacity for each channel of the client.
+//
 pub const CHANNEL_CAPACITY: usize = 1_000;
 
 pub struct BrokerClient {
@@ -47,6 +48,7 @@ pub struct BrokerClient {
     transports: HashMap<ShardId, Vec<Framed<TcpStream, LengthDelimitedCodec>>>,
 
     // broker
+    //
     broker: Broker,
 }
 
@@ -63,6 +65,7 @@ impl BrokerClient {
       rate: u64,
       total_txs: u32,
       send_tx_duration_ms: u32,
+      //
       mut client_addr: SocketAddr,
       all_committees: Committees,
       epoch: usize,

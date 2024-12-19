@@ -10,28 +10,30 @@ use std::io::Write as _;
 use std::net::SocketAddr;
 use thiserror::Error;
 
+// 定义错误类型
 #[derive(Error, Debug)]
 pub enum ConfigError {
     #[error("shard {0} is not in the committees")]
-    NotInCommittees(ShardId),
+    NotInCommittees(ShardId), // 分片不在委员会中
 
     #[error("Node {0} is not in the committee")]
-    NotInCommittee(PublicKey),
+    NotInCommittee(PublicKey), // 节点不在委员会中
 
     #[error("Unknown worker id {0}")]
-    UnknownWorker(WorkerId),
+    UnknownWorker(WorkerId), // 未知的工作者ID
 
     #[error("Failed to read config file '{file}': {message}")]
-    ImportError { file: String, message: String },
+    ImportError { file: String, message: String }, // 导入配置文件失败
 
     #[error("Failed to write config file '{file}': {message}")]
-    ExportError { file: String, message: String },
+    ExportError { file: String, message: String }, // 导出配置文件失败
 }
 
+// 定义'Import'特性，用于从文件中加载配置
 pub trait Import: DeserializeOwned {
     fn import(path: &str) -> Result<Self, ConfigError> {
         let reader = || -> Result<Self, std::io::Error> {
-            let data = fs::read(path)?;
+            let data = fs::read(path)?; // 从路径读取文件内容
             Ok(serde_json::from_slice(data.as_slice())?)
         };
         reader().map_err(|e| ConfigError::ImportError {
@@ -41,6 +43,7 @@ pub trait Import: DeserializeOwned {
     }
 }
 
+// 定义 `Export` 特性，用于将配置写入文件
 pub trait Export: Serialize {
     fn export(&self, path: &str) -> Result<(), ConfigError> {
         let writer = || -> Result<(), std::io::Error> {
@@ -58,12 +61,13 @@ pub trait Export: Serialize {
     }
 }
 
-pub type Stake = usize;
-pub type WorkerId = u32;
-pub type ShardId = usize;
-pub type NodeId = u32;
-pub type ShardNum = usize;
+pub type Stake = usize; // 投票权类型
+pub type WorkerId = u32; // 工作者 ID
+pub type ShardId = usize; // 分片 ID
+pub type NodeId = u32; // 节点 ID
+pub type ShardNum = usize; // 分片数量
 
+// 'Parameters' 定义系统参数，并提供默认值
 #[derive(Deserialize, Clone)]
 pub struct Parameters {
     /// The preferred header size. The primary creates a new header when it has enough parents and
@@ -73,7 +77,7 @@ pub struct Parameters {
     /// did not reach `max_header_size`. Denominated in ms.
     pub max_header_delay: u64,
     /// The depth of the garbage collection (Denominated in number of rounds).
-    pub gc_depth: u64,
+    pub gc_depth: u64, // 垃圾回收深度
     /// The delay after which the synchronizer retries to send sync requests. Denominated in ms.
     pub sync_retry_delay: u64,
     /// Determine with how many nodes to sync when re-trying to send sync-request. These nodes
@@ -135,6 +139,7 @@ pub struct WorkerAddresses {
     pub cross_shard_worker: SocketAddr,
 }
 
+// 定义权限结构体，用于存储节点的投票权和地址信息
 #[derive(Clone, Deserialize, Debug)]
 pub struct Authority {
     /// The voting power of this authority.
@@ -145,6 +150,7 @@ pub struct Authority {
     pub workers: HashMap<WorkerId, WorkerAddresses>,
 }
 
+// 定义委员会结构体，用于管理节点及其权限信息
 #[derive(Clone, Deserialize, Debug)]
 pub struct Committee {
     pub authorities: BTreeMap<PublicKey, Authority>,
@@ -156,20 +162,20 @@ impl Import for Committee {}
 impl Committee {
     /// Returns the number of authorities.
     pub fn size(&self) -> usize {
-        self.authorities.len()
+        self.authorities.len() // 返回节点数量
     }
 
     /// Return the stake of a specific authority.
     pub fn stake(&self, name: &PublicKey) -> Stake {
-        self.authorities.get(name).map_or_else(|| 0, |x| x.stake)
+        self.authorities.get(name).map_or_else(|| 0, |x| x.stake) // 查询某节点的投票权
     }
 
     /// Returns the stake of all authorities except `myself`.
     pub fn others_stake(&self, myself: &PublicKey) -> Vec<(PublicKey, Stake)> {
         self.authorities
             .iter()
-            .filter(|(name, _)| name != &myself)
-            .map(|(name, authority)| (*name, authority.stake))
+            .filter(|(name, _)| name != &myself) // 排除自身节点
+            .map(|(name, authority)| (*name, authority.stake))  // 收集其他节点的投票权
             .collect()
     }
 
@@ -178,7 +184,7 @@ impl Committee {
         // If N = 3f + 1 + k (0 <= k < 3)
         // then (2 N + 3) / 3 = 2f + 1 + (2k + 2)/3 = 2f + 1 + k = N - f
         let total_votes: Stake = self.authorities.values().map(|x| x.stake).sum();
-        2 * total_votes / 3 + 1
+        2 * total_votes / 3 + 1 // 返回达到法定人数所需投票权（2f + 1）
     }
 
     /// Returns the stake required to reach availability (f+1).
@@ -186,30 +192,30 @@ impl Committee {
         // If N = 3f + 1 + k (0 <= k < 3)
         // then (N + 2) / 3 = f + 1 + k/3 = f + 1
         let total_votes: Stake = self.authorities.values().map(|x| x.stake).sum();
-        (total_votes + 2) / 3
+        (total_votes + 2) / 3 // 返回达到有效性的最小投票权（f+1）
     }
 
     /// Returns a leader node in a round-robin fashion.
     pub fn leader(&self, seed: usize) -> PublicKey {
-        let mut keys: Vec<_> = self.authorities.keys().cloned().collect();
-        keys.sort();
-        keys[seed % self.size()]
+        let mut keys: Vec<_> = self.authorities.keys().cloned().collect(); // 提取所有公钥
+        keys.sort(); // 排序实现轮询机制
+        keys[seed % self.size()] // 返回当前轮次的领导者
     }
 
     /// Returns the primary addresses of the target primary.
     pub fn primary(&self, to: &PublicKey) -> Result<PrimaryAddresses, ConfigError> {
         self.authorities
             .get(to)
-            .map(|x| x.primary.clone())
-            .ok_or_else(|| ConfigError::NotInCommittee(*to))
+            .map(|x| x.primary.clone()) // 查找制定节点的主节点地址
+            .ok_or_else(|| ConfigError::NotInCommittee(*to)) // 节点不存在则返回 NotInCommittee
     }
 
     /// Returns the addresses of all primaries except `myself`.
     pub fn others_primaries(&self, myself: &PublicKey) -> Vec<(PublicKey, PrimaryAddresses)> {
         self.authorities
             .iter()
-            .filter(|(name, _)| name != &myself)
-            .map(|(name, authority)| (*name, authority.primary.clone()))
+            .filter(|(name, _)| name != &myself) // 排除自身
+            .map(|(name, authority)| (*name, authority.primary.clone())) // 获取其他主节点的地址
             .collect()
     }
 
@@ -281,7 +287,7 @@ impl Committee {
 }
 
 
-
+// 定义多分片委员会结构体，用于支持分片
 #[derive(Clone, Deserialize, Debug)]
 pub struct Committees {
     pub shards: HashMap<ShardId, Committee>,

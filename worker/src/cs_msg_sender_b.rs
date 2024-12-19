@@ -11,7 +11,7 @@ use crate::messages::Height;
 use crate::worker::SendCSMessage;
 use crate::messages::CSMsg;
 
-
+// 用于处理跨分片消息，并将其发送到 broker 客户端
 pub struct Send2Broker {
   shard_id: ShardId,
   node_id: NodeId,
@@ -39,6 +39,7 @@ pub struct Send2Broker {
 
 
 impl Send2Broker {
+  // 启动 Send2Broker 实例
   #[allow(clippy::too_many_arguments)]
   pub fn spawn(
     // shard config
@@ -81,6 +82,7 @@ impl Send2Broker {
   }
 
   /// Main loop listening to the messages.
+  // 监听并处理跨分片消息
   async fn run(&mut self) {
 
     info!(
@@ -101,12 +103,14 @@ impl Send2Broker {
       debug!("receiving csmsg to shard {}: {:?}", target_shard, tx);
 
       // malicious cs node does not process csmsg
+      // 如果节点是恶意节点，则不处理跨分片消息
       if self.is_malicious {
         continue;
       }   
 
 
       // generate CSMsg
+      // 生成跨分片消息
       let mut csmsg = CSMsg::new(self.shard_id, target_shard,self.tx1_id, tx, &self.name, &mut self.signature_service).await;
       csmsg.set_sig(&mut self.signature_service).await;
 
@@ -117,12 +121,14 @@ impl Send2Broker {
       // info!("send csmsg: {}, counter: {:?}", msg_id, csmsg.get_counter().await);
       
 
-      // get the list of csmsg senders 
+      // get the list of csmsg senders
+      // 获取当前消息的发送节点列表
       let candi_node_id_list = shuffle_node_id_list(self.shard_size, &csmsg.inner_tx_hash);
       let sender_ids = &candi_node_id_list[0..self.cs_sender_nums];
       debug!("candi_node_id_list: {:?}", candi_node_id_list);
       debug!("sender_ids: {:?}", sender_ids);
 
+      // 如果当前节点在发送节点列表中，则发送消息
       if sender_ids.contains(&(self.node_id as usize)) { // this node is a csmsg sender
         let bytes = bincode::serialize(&csmsg).expect("Failed to serialize our vote");
   

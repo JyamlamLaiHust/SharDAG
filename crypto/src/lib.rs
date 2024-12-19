@@ -15,6 +15,7 @@ use tokio::sync::oneshot;
 #[path = "tests/crypto_tests.rs"]
 pub mod crypto_tests;
 
+// 类型别名，表示加密错误
 pub type CryptoError = ed25519::Error;
 
 /// Represents a hash digest (32 bytes).
@@ -24,28 +25,33 @@ pub struct Digest(pub [u8; 32]);
 // pub const DIGESTSIZE: usize = 32;
 
 impl Digest {
+    // 转换为字节向量
     pub fn to_vec(&self) -> Vec<u8> {
         self.0.to_vec()
     }
 
+    // 获取哈希大小
     pub fn size(&self) -> usize {
         self.0.len()
     }
 }
 
 impl fmt::Debug for Digest {
+    // 格式化为 Base64 编码
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         write!(f, "{}", base64::encode(&self.0))
     }
 }
 
 impl fmt::Display for Digest {
+    // 格式化为 Base64 编码的前16个字符
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         write!(f, "{}", base64::encode(&self.0).get(0..16).unwrap())
     }
 }
 
 impl AsRef<[u8]> for Digest {
+    // 转换为引用的字节数组
     fn as_ref(&self) -> &[u8] {
         &self.0
     }
@@ -53,6 +59,7 @@ impl AsRef<[u8]> for Digest {
 
 impl TryFrom<&[u8]> for Digest {
     type Error = TryFromSliceError;
+    // 从字节切片尝试构造Digest
     fn try_from(item: &[u8]) -> Result<Self, Self::Error> {
         Ok(Digest(item.try_into()?))
     }
@@ -68,10 +75,12 @@ pub trait Hash {
 pub struct PublicKey(pub [u8; 32]);
 
 impl PublicKey {
+    // 使用 Base64 编码公钥
     pub fn encode_base64(&self) -> String {
         base64::encode(&self.0[..])
     }
 
+    // 从 Base64 解码公钥
     pub fn decode_base64(s: &str) -> Result<Self, base64::DecodeError> {
         let bytes = base64::decode(s)?;
         let array = bytes[..32]
@@ -81,18 +90,21 @@ impl PublicKey {
     }
 }
 
+// 格式化为 Base64 字符串
 impl fmt::Debug for PublicKey {
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         write!(f, "{}", self.encode_base64())
     }
 }
 
+// 格式化为 Base64 编码的前16个字符
 impl fmt::Display for PublicKey {
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         write!(f, "{}", self.encode_base64().get(0..16).unwrap())
     }
 }
 
+// 将公钥序列化为字符串
 impl Serialize for PublicKey {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -102,6 +114,7 @@ impl Serialize for PublicKey {
     }
 }
 
+// 从字符串反序列化
 impl<'de> Deserialize<'de> for PublicKey {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
@@ -113,6 +126,7 @@ impl<'de> Deserialize<'de> for PublicKey {
     }
 }
 
+// 转换为字节数组引用
 impl AsRef<[u8]> for PublicKey {
     fn as_ref(&self) -> &[u8] {
         &self.0
@@ -162,6 +176,7 @@ impl Drop for SecretKey {
     }
 }
 
+// 生成密钥对
 pub fn generate_production_keypair() -> (PublicKey, SecretKey) {
     generate_keypair(&mut OsRng)
 }
@@ -254,12 +269,14 @@ impl SignatureService {
 
 
 // TODO
+// 组装完整的阈值签名
 pub fn assemble_intact_ts_partial(_ts_sig_list: Vec<Signature>, _ts_pub: PublicKey, _msg_hash: &Digest, _con_thres: usize, _total_nodes: usize) -> Signature {
 
   return Signature::default();
 }
 
 // TODO
+// 验证阈值签名
 pub fn verify_ts_sig(_ts_pub: PublicKey, _msg_hash: &Digest, _intact_sig: &Signature) -> bool {
   return true;
 }
