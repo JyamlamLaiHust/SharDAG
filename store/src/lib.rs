@@ -14,14 +14,14 @@ type Key = Vec<u8>;
 type Value = Vec<u8>;
 
 pub enum StoreCommand {
-    Write(Key, Value),
-    Read(Key, oneshot::Sender<StoreResult<Option<Value>>>),
-    NotifyRead(Key, oneshot::Sender<StoreResult<Value>>),
+    Write(Key, Value), // 写入键值对
+    Read(Key, oneshot::Sender<StoreResult<Option<Value>>>), // 读取键对应的值
+    NotifyRead(Key, oneshot::Sender<StoreResult<Value>>), // 通知读取键对应的值
 }
 
 #[derive(Clone)]
 pub struct Store {
-    channel: Sender<StoreCommand>,
+    channel: Sender<StoreCommand>, // 用于发送存储命令
 }
 
 impl Store {

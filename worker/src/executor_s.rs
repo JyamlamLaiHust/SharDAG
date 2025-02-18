@@ -39,11 +39,10 @@ pub struct SExecutor {
     // state store
     state_transition: StateTransition,
     avatar_store: AvatartStore,
-    
     _acc2shard: Box<dyn Account2Shard + Send>,
     csmsg_store: CSMsgStore,
 
-    // parameters
+    // parameters 控制账户聚合的参数
     agg_interval: usize,
 
     // pending_tx_list: Vec<PendingTx>,
