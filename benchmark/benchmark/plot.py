@@ -91,7 +91,7 @@ class Plot:
       labelspacing=0.15, 
       handletextpad=0.3, 
       borderpad=0.2, 
-      prop = {'size':28}
+      prop = {'size':20}
     )
     y_major_locator=MultipleLocator(4000)
     ax=plt.gca()
@@ -118,6 +118,7 @@ class Plot:
 
     bars = g.patches
     hatches=np.repeat(self.pattern,7)
+    hatches=np.repeat(self.pattern,7)
     for pat,bar in zip(hatches,bars):
       bar.set_hatch(pat)
       # bar.set_linewidth(3)
@@ -130,7 +131,7 @@ class Plot:
       labelspacing=0.15, 
       handletextpad=0.3, 
       borderpad=0.2, 
-      prop = {'size':28}
+      prop = {'size':20}
     )
     y_major_locator=MultipleLocator(20000)
     ax=plt.gca()
@@ -145,8 +146,8 @@ class Plot:
   def draw_tps_latency(self, input_rates):
     sns.set_theme(
       style="ticks", 
-      font_scale=3.0,
-      font='Arial',
+      font_scale=1.0,
+      font='DejaVu Sans',
       rc={
         'figure.figsize':(8,5),
         "axes.spines.right": True, "axes.spines.top": True, "axes.spines.left": True,

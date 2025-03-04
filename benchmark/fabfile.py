@@ -9,21 +9,21 @@ from benchmark.plot import Plot
 def local(ctx, debug=False):
     ''' Run benchmarks on localhost '''
     bench_params = {
-        'shard_numbers': [2],
+        'shard_numbers': [4, 6, 8, 10, 12, 14, 16],
         'nodes': [4],
         'faults': 0,
         'cs_faults': 0,
         'workers': 1, # # of workers per node
         'runs': [1], # times, epoch
 
-        'rate': [200], # transaction sending rate per node
+        'rate': [100, 200], # transaction sending rate per node
         'duration': 40, # running duration
         'total_txs': 1000000, # 1000000
         'tx_size': 512, # B 事务大小为512B
 
         'acc_shard_type': 0, # 0: Hash, 1: Graph
         'executor_type': 0, # 0: SharDAG, 1: Monoxide, 2: Broker
-        'state_store_type': 1, # 0: TStore, 1: MStore. Monoxide and Broker use MStore. 
+        'state_store_type': 0, # 0: TStore, 1: MStore. Monoxide and Broker use MStore.
         'append_type': 0, # 0: Dual-mode, 1: Serial
     }
     node_params = {
