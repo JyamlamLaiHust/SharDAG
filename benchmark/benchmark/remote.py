@@ -32,7 +32,7 @@ class RemoteBench:
     def __init__(self, ctx):
 
         self.repo_name = "SharDAG"
-        self.repo_url = "https://github.com/cfll19/SharDAG.git"        
+        self.repo_url = "https://github.com/JyamlamLaiHust/SharDAG.git"
         self.repo_branch = "main"
 
         # remote hosts
@@ -41,28 +41,15 @@ class RemoteBench:
         self.base_port = 5000
         self.nodes_per_host = 10
         self.hosts = [
-            '47.91.25.185:22',
-            '47.74.18.161:22',
-            '47.245.6.111:22',
-            '47.245.54.140:22',
+            # 每天开机都要检查 ip
 
-            '8.213.144.111:22',
-            '8.213.132.101:22',
-            '8.213.134.202:22',
-            '8.213.131.189:22',
-
-            '47.245.109.55:22',
-            '8.219.140.125:22',
-            '8.219.246.84:22',
-            '8.222.153.141:22',
-
-            '8.209.100.165:22',
-            '47.91.78.47:22',
-            '47.254.140.9:22',
-            '47.254.153.154:22',
+            '47.122.125.39:22',
+            '47.122.123.157:22',
+            '47.122.126.247:22',
+            '47.122.125.208:22',
           ]
         self.ip_to_host = { host.split(':')[0]:host for host in self.hosts}
-        self.client_addr = f"8.218.238.62:5000"
+        self.client_addr = f"47.122.126.184:5000"
 
 
     def _check_stderr(self, output):
@@ -91,9 +78,9 @@ class RemoteBench:
                 yield f
 
     def unload_input_files(self):
-        hosts = [
-              '10.176.50.16:32772',
-        ]
+        # hosts = [
+        #       '10.176.50.16:32772',
+        # ]
         Print.info('Upload input files ...')
         try:
             cmd = 'mkdir input'
@@ -109,7 +96,7 @@ class RemoteBench:
             
             # cmd = 'apt-get install unzip ; rm -r acc-input ; unzip acc-input.zip'
             g.run(f'{cmd} || true', hide=True)
-            g.put('/root/input/input-e0.csv', './input')
+            g.put('/home/jaylen/SharDAG/test-workload/input-e0.csv', './input')
         except (GroupException, ExecutionError) as e:
             e = FabricError(e) if isinstance(e, GroupException) else e
             raise BenchError('Failed to upload input files', e)        
@@ -118,6 +105,14 @@ class RemoteBench:
     def install(self):
         Print.info('Installing rust...')
         cmd = [
+          # 'sudo rm /var/lib/dpkg/lock-frontend',
+          # 'sudo rm /var/lib/dpkg/lock',
+          # 'sudo rm /var/cache/apt/archives/lock',
+          # 'sudo dpkg --configure -a',
+          #
+          'export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static',
+          'export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup',
+
           'apt-get update',
           'apt-get -y upgrade',
           'apt-get -y autoremove',
@@ -136,7 +131,7 @@ class RemoteBench:
 
           'apt-get install -y tmux',
           'apt-get install -y git',
-          'rm -rf SharDAG',
+          'sudo rm -rf SharDAG',
         ]
         
         hosts = self.hosts # get node ips
@@ -144,7 +139,7 @@ class RemoteBench:
         try:
             g = Group(*hosts, user='root', connect_kwargs=self.connect)
             print("test")
-            g.run(' && '.join(cmd), hide=True)
+            g.run(' && '.join(cmd), hide=False)
             print("end")
             Print.heading(f'Initialized testbed of {len(hosts)} nodes')
         except (GroupException, ExecutionError) as e:
@@ -157,13 +152,14 @@ class RemoteBench:
 
         cmd = [
             # Clone the repo.
+            # 'sudo rm -rf SharDAG',
             f'(git clone -b {self.repo_branch} {self.repo_url})'
         ]
         hosts = self.hosts # get node ips
         print("all hosts: ", hosts)
         try:
             g = Group(*hosts, user='root', connect_kwargs=self.connect)
-            g.run(' && '.join(cmd), hide=True)
+            g.run(' && '.join(cmd), hide=False)
             Print.heading(f'Cloned repo of {len(hosts)} nodes')
         except (GroupException, ExecutionError) as e:
             e = FabricError(e) if isinstance(e, GroupException) else e
@@ -239,7 +235,7 @@ class RemoteBench:
         ]
         try: 
           g = Group(*ips,  user='root', connect_kwargs=self.connect)
-          g.run(' && '.join(cmd), hide=True)
+          g.run(' && '.join(cmd), hide=False)
         except (GroupException, ExecutionError) as e:
             e = FabricError(e) if isinstance(e, GroupException) else e
             raise BenchError('Failed to update nodes', e)
