@@ -96,12 +96,14 @@ class PathMaker:
     @staticmethod
     def input_path():
         # return 'input'
-        return '/home/jaylen/SharDAG/test-workload'
+        # return '/home/jaylen/SharDAG/test-workload'
+        return '/root/SharDAG/test-workload'
 
     @staticmethod
     def acc_input_path():
         # return 'input'
-        return '/home/jaylen/SharDAG/test-workload'
+        # return '/home/jaylen/SharDAG/test-workload'
+        return '/root/SharDAG/test-workload'
 
     @staticmethod
     def workload_input_file(e): # epoch e contains a fixed number of txs

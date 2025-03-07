@@ -43,13 +43,13 @@ class RemoteBench:
         self.hosts = [
             # 每天开机都要检查 ip
 
-            '47.122.125.39:22',
-            '47.122.123.157:22',
-            '47.122.126.247:22',
-            '47.122.125.208:22',
+            '47.243.168.208:22',
+            '47.243.165.254:22',
+            '47.243.171.254:22',
+            '47.243.168.147:22',
           ]
         self.ip_to_host = { host.split(':')[0]:host for host in self.hosts}
-        self.client_addr = f"47.122.126.184:5000"
+        self.client_addr = f"47.243.109.254:5000"
 
 
     def _check_stderr(self, output):
@@ -96,7 +96,8 @@ class RemoteBench:
             
             # cmd = 'apt-get install unzip ; rm -r acc-input ; unzip acc-input.zip'
             g.run(f'{cmd} || true', hide=True)
-            g.put('/home/jaylen/SharDAG/test-workload/input-e0.csv', './input')
+            # g.put('/home/jaylen/SharDAG/test-workload/input-e0.csv', './input')
+            g.put('/root/SharDAG/test-workload/input-e0.csv', './input')
         except (GroupException, ExecutionError) as e:
             e = FabricError(e) if isinstance(e, GroupException) else e
             raise BenchError('Failed to upload input files', e)        
