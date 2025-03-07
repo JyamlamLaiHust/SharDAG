@@ -13,6 +13,8 @@ def local(ctx, debug=False):
         'nodes': [4],
         'faults': 0,
         'cs_faults': 0,
+        'sample_interval': 1,
+
         'workers': 1, # # of workers per node
         'runs': [1], # times, epoch
 

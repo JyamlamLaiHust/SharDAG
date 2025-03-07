@@ -393,7 +393,7 @@ class RemoteBench:
                       PathMaker.ft_db_path(nodeid, shardid),
                       # fot testing tps & lantecy
                       PathMaker.acc2shard_file_default(),
-                      PathMaker.acc2shard_file_default(),
+                      # PathMaker.acc2shard_file_default(),
                       # PathMaker.acc2shard_file(epoch, shard_num),
                       # PathMaker.actacc2shard_file(epoch, shard_num),
                       epoch,
