@@ -1,0 +1,61 @@
+
+-----------------------------------------
+ SUMMARY:
+-----------------------------------------
+ + CONFIG:
+ Total node number: 40 node(s)
+ Shard number: 4 shard(s)
+ Shard size: 10 node(s)
+ Faults: 0 node(s)
+ CS faults: 3 node(s)
+ Worker(s) per node: 1 worker(s)
+ Collocate primary and workers: True
+ Tx size: 512 B
+ Epoch: 0 
+ Total txs: 10,000,000 
+ Total tx rate: 4,000 tx/s
+ Total txs (actual): 2,000
+ Execution time: 74 s
+ Header size: 50 B
+ Max header delay: 1,000 ms
+ GC depth: 50 round(s)
+ Sync retry delay: 10,000 ms
+ Sync retry nodes: 3 node(s)
+ Batch size: 500,000 B
+ Max batch delay: 200 ms
+
+ + RESULTS:
+------Consensus Performance------
+ Consensus TPS: 24 tx/s
+ Consensus BPS: 22,252 B/s
+ Consensus latency: 4,852 ms
+
+------End-to-end Consensus Performance------
+ End-to-end TPS: 24 tx/s
+ End-to-end BPS: 22,235 B/s
+ End-to-end latency: 0 ms
+
+------End-to-end Execution Performance------
+ End-to-end execution TPS: 22 tx/s
+ End-to-end execution latency: 18,046 ms
+
+ Total packaged external txs: 2001 txs
+ Total precessed external txs: 1637 txs
+ Total committed txs: 1637 txs
+ Cross-shard txs: 1186
+ Cross-shard tx rate: 72.44960293219303%
+ Total general txs: 2970 txs
+ Total external txs/Total general txs: 55.11784511784512%
+
+------CSMsg appending delay------
+ Append type: Serial
+ Avg appending delay: 1330 ms
+
+------Account cache storage cost------
+ Avg avatar cost (KB): 0
+ Max avatar cost (KB): 0
+
+------Storage cost------
+ Ledger per node (MB): 17.5
+ State per node (MB): 2.75
+-----------------------------------------

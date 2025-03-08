@@ -8,7 +8,7 @@
 rust/.idea/*
 .db-*
 test_db*
-
+results copy
 
 target/
 !/**/src/**/target/
