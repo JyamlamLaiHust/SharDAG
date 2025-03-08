@@ -1,0 +1,658 @@
+[2025-03-08T08:34:09.566Z INFO  config] Header size set to 50 B
+[2025-03-08T08:34:09.566Z INFO  config] Max header delay set to 1000 ms
+[2025-03-08T08:34:09.566Z INFO  config] Garbage collection depth set to 50 rounds
+[2025-03-08T08:34:09.566Z INFO  config] Sync retry delay set to 10000 ms
+[2025-03-08T08:34:09.566Z INFO  config] Sync retry nodes set to 3 nodes
+[2025-03-08T08:34:09.566Z INFO  config] Batch size set to 500000 B
+[2025-03-08T08:34:09.566Z INFO  config] Max batch delay set to 200 ms
+[2025-03-08T08:34:09.566Z INFO  primary::primary] Primary BzcG2Wrc7EtxkRia listening to primary messages on 0.0.0.0:5000
+[2025-03-08T08:34:09.566Z INFO  primary::primary] Primary BzcG2Wrc7EtxkRia listening to workers messages on 0.0.0.0:5001
+[2025-03-08T08:34:09.566Z INFO  primary::primary] Primary BzcG2Wrc7EtxkRia successfully booted on 47.243.165.254
+[2025-03-08T08:34:10.497Z INFO  network::receiver] Incoming connection established with 47.243.168.208:35934
+[2025-03-08T08:34:10.497Z INFO  network::receiver] Incoming connection established with 47.243.168.208:35948
+[2025-03-08T08:34:10.498Z INFO  network::reliable_sender] Outgoing connection established with 47.243.168.208:5000
+[2025-03-08T08:34:10.567Z WARN  primary::proposer] Timer expired for round 0
+[2025-03-08T08:34:10.567Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:10.568Z INFO  network::simple_sender] Outgoing connection established with 47.243.165.254:5006
+[2025-03-08T08:34:10.568Z INFO  network::reliable_sender] Outgoing connection established with 47.243.165.254:5006
+[2025-03-08T08:34:10.568Z INFO  network::reliable_sender] Outgoing connection established with 47.243.168.208:5006
+[2025-03-08T08:34:10.568Z INFO  network::simple_sender] Outgoing connection established with 47.243.168.208:5000
+[2025-03-08T08:34:10.568Z INFO  network::simple_sender] Outgoing connection established with 47.243.168.208:5006
+[2025-03-08T08:34:10.568Z INFO  network::receiver] Incoming connection established with 47.243.165.254:42548
+[2025-03-08T08:34:10.568Z INFO  network::receiver] Incoming connection established with 47.243.168.208:40812
+[2025-03-08T08:34:10.685Z INFO  network::receiver] Incoming connection established with 47.243.168.208:40826
+[2025-03-08T08:34:10.810Z INFO  network::receiver] Incoming connection established with 47.243.165.254:42558
+[2025-03-08T08:34:11.569Z WARN  primary::proposer] Timer expired for round 1
+[2025-03-08T08:34:11.569Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:12.570Z WARN  primary::proposer] Timer expired for round 3
+[2025-03-08T08:34:12.570Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:13.571Z WARN  primary::proposer] Timer expired for round 4
+[2025-03-08T08:34:13.571Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:14.573Z WARN  primary::proposer] Timer expired for round 5
+[2025-03-08T08:34:14.573Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:14.690Z INFO  network::simple_sender] Outgoing connection established with 47.243.165.254:5002
+[2025-03-08T08:34:15.573Z WARN  primary::proposer] Timer expired for round 7
+[2025-03-08T08:34:15.573Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:16.574Z WARN  primary::proposer] Timer expired for round 8
+[2025-03-08T08:34:16.574Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:17.575Z WARN  primary::proposer] Timer expired for round 9
+[2025-03-08T08:34:17.575Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:18.185Z INFO  network::receiver] Incoming connection established with 47.243.165.254:50702
+[2025-03-08T08:34:18.507Z INFO  primary::proposer] Package 2 batches into new header
+[2025-03-08T08:34:18.507Z INFO  primary::proposer] Created B12(BzcG2Wrc7EtxkRia) -> Wt5m97VIsrkHK99obGQUljXAaa/bYWztypzjUBWEfMI=
+[2025-03-08T08:34:18.507Z INFO  primary::proposer] Created B12(BzcG2Wrc7EtxkRia) -> ZG+AJBapIpDhDSi7Ka/yjZx6BA2kB/k5kp2kj7Kvt6s=
+[2025-03-08T08:34:18.813Z INFO  network::simple_sender] Outgoing connection established with 47.243.168.208:5008
+[2025-03-08T08:34:19.127Z INFO  primary::proposer] Package 2 batches into new header
+[2025-03-08T08:34:19.127Z INFO  primary::proposer] Created B14(BzcG2Wrc7EtxkRia) -> Nn7JKh49imTUPR6vCg6JNysuasSJ+R/FsgLFfspClNc=
+[2025-03-08T08:34:19.127Z INFO  primary::proposer] Created B14(BzcG2Wrc7EtxkRia) -> ZHbDRH1UzO4YYcydeJ1hfr4cb5t1iw73pT29uIGSrBY=
+[2025-03-08T08:34:19.937Z INFO  consensus] Committed B11(WukVxEx2CB506JI0) -> GbrxlHbawC1ALw1NVxQcd8Eo0Uugb9826JYtOXdvHpE=
+[2025-03-08T08:34:19.937Z INFO  consensus] Committed B11(WukVxEx2CB506JI0) -> M6J9fq3jcRybQ0z0/qCgC3j7TefLZiCzwDAotvJMGSs=
+[2025-03-08T08:34:19.937Z INFO  consensus] Committed B12(BzcG2Wrc7EtxkRia) -> Wt5m97VIsrkHK99obGQUljXAaa/bYWztypzjUBWEfMI=
+[2025-03-08T08:34:19.937Z INFO  consensus] Committed B12(BzcG2Wrc7EtxkRia) -> ZG+AJBapIpDhDSi7Ka/yjZx6BA2kB/k5kp2kj7Kvt6s=
+[2025-03-08T08:34:20.128Z WARN  primary::proposer] Timer expired for round 14
+[2025-03-08T08:34:20.128Z INFO  primary::proposer] Package 1 batches into new header
+[2025-03-08T08:34:20.128Z INFO  primary::proposer] Created B15(BzcG2Wrc7EtxkRia) -> 7YmEYlHfvnxdknK/pMBKAUT25wGgHMPNMeRUZpQFqfQ=
+[2025-03-08T08:34:21.130Z WARN  primary::proposer] Timer expired for round 15
+[2025-03-08T08:34:21.130Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B12(+8roLoZUMw7Jwfee) -> cmQqljijtQ3XAEOhm60rpBXzzWJnSB7sGfw0bxAKxsU=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B12(+8roLoZUMw7Jwfee) -> wZIm4pj6ThRkism/DQIz1QiBUvR25n72n7L/fNk4yvw=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B12(+tlmDOJIHHFwt+r3) -> K5LJfpRUJCW44CNtIr2EGuy3zACzMxyyhJcAWivG/68=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B12(+tlmDOJIHHFwt+r3) -> LSRv6jB+1+SEayXIC5tGanH+kL+aNGvZKHjrH5HltI8=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B13(WukVxEx2CB506JI0) -> Byfg97nmHfZc7J3FIbS8ehVfOk+3nvfZkK8OS97lzeI=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B13(WukVxEx2CB506JI0) -> bnCyZYwOQ95nrdg2kLYk6pgJ7ILYnEpbYxU7XY946Zo=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B13(+8roLoZUMw7Jwfee) -> UY8nyMul3SFUyeyv7Iq8QifGBkPGuvE1Od+3BByerSE=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B13(+8roLoZUMw7Jwfee) -> kUHqXMDhEE68eZ8aDkVzuI+8NzkIhukYxloxhXAp/e4=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B13(+tlmDOJIHHFwt+r3) -> ODwVKo8YKMsZdfwIaY2Y4jHbSV2w5ETeMU0LUHL/jIg=
+[2025-03-08T08:34:21.798Z INFO  consensus] Committed B13(+tlmDOJIHHFwt+r3) -> 6vd6FJ2wovUbVhfaDlRteDFrvQyC8QY9hhXtTgwdD+Q=
+[2025-03-08T08:34:22.131Z WARN  primary::proposer] Timer expired for round 17
+[2025-03-08T08:34:22.131Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:22.941Z INFO  consensus] Committed B14(BzcG2Wrc7EtxkRia) -> Nn7JKh49imTUPR6vCg6JNysuasSJ+R/FsgLFfspClNc=
+[2025-03-08T08:34:22.941Z INFO  consensus] Committed B14(BzcG2Wrc7EtxkRia) -> ZHbDRH1UzO4YYcydeJ1hfr4cb5t1iw73pT29uIGSrBY=
+[2025-03-08T08:34:22.941Z INFO  consensus] Committed B15(BzcG2Wrc7EtxkRia) -> 7YmEYlHfvnxdknK/pMBKAUT25wGgHMPNMeRUZpQFqfQ=
+[2025-03-08T08:34:23.131Z WARN  primary::proposer] Timer expired for round 18
+[2025-03-08T08:34:23.131Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:24.133Z WARN  primary::proposer] Timer expired for round 19
+[2025-03-08T08:34:24.133Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:25.133Z WARN  primary::proposer] Timer expired for round 21
+[2025-03-08T08:34:25.133Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:26.135Z WARN  primary::proposer] Timer expired for round 22
+[2025-03-08T08:34:26.135Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:27.135Z WARN  primary::proposer] Timer expired for round 23
+[2025-03-08T08:34:27.135Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:28.137Z WARN  primary::proposer] Timer expired for round 25
+[2025-03-08T08:34:28.137Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:29.137Z WARN  primary::proposer] Timer expired for round 26
+[2025-03-08T08:34:29.137Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:30.139Z WARN  primary::proposer] Timer expired for round 27
+[2025-03-08T08:34:30.139Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:31.139Z WARN  primary::proposer] Timer expired for round 29
+[2025-03-08T08:34:31.139Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:32.141Z WARN  primary::proposer] Timer expired for round 30
+[2025-03-08T08:34:32.141Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:33.142Z WARN  primary::proposer] Timer expired for round 31
+[2025-03-08T08:34:33.142Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:34.144Z WARN  primary::proposer] Timer expired for round 33
+[2025-03-08T08:34:34.144Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:35.144Z WARN  primary::proposer] Timer expired for round 34
+[2025-03-08T08:34:35.144Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:36.145Z WARN  primary::proposer] Timer expired for round 35
+[2025-03-08T08:34:36.145Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:37.147Z WARN  primary::proposer] Timer expired for round 37
+[2025-03-08T08:34:37.147Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:38.147Z WARN  primary::proposer] Timer expired for round 38
+[2025-03-08T08:34:38.147Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:39.149Z WARN  primary::proposer] Timer expired for round 39
+[2025-03-08T08:34:39.149Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:40.149Z WARN  primary::proposer] Timer expired for round 41
+[2025-03-08T08:34:40.149Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:41.151Z WARN  primary::proposer] Timer expired for round 42
+[2025-03-08T08:34:41.151Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:42.151Z WARN  primary::proposer] Timer expired for round 43
+[2025-03-08T08:34:42.151Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:43.152Z WARN  primary::proposer] Timer expired for round 45
+[2025-03-08T08:34:43.153Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:44.154Z WARN  primary::proposer] Timer expired for round 46
+[2025-03-08T08:34:44.154Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:45.154Z WARN  primary::proposer] Timer expired for round 47
+[2025-03-08T08:34:45.154Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:46.155Z WARN  primary::proposer] Timer expired for round 49
+[2025-03-08T08:34:46.155Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:47.157Z WARN  primary::proposer] Timer expired for round 50
+[2025-03-08T08:34:47.157Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:48.158Z WARN  primary::proposer] Timer expired for round 51
+[2025-03-08T08:34:48.158Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:49.160Z WARN  primary::proposer] Timer expired for round 53
+[2025-03-08T08:34:49.160Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:50.161Z WARN  primary::proposer] Timer expired for round 54
+[2025-03-08T08:34:50.161Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:51.161Z WARN  primary::proposer] Timer expired for round 55
+[2025-03-08T08:34:51.161Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:52.162Z WARN  primary::proposer] Timer expired for round 57
+[2025-03-08T08:34:52.162Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:53.164Z WARN  primary::proposer] Timer expired for round 58
+[2025-03-08T08:34:53.164Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:54.164Z WARN  primary::proposer] Timer expired for round 59
+[2025-03-08T08:34:54.164Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:55.165Z WARN  primary::proposer] Timer expired for round 61
+[2025-03-08T08:34:55.165Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:56.167Z WARN  primary::proposer] Timer expired for round 62
+[2025-03-08T08:34:56.167Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:57.168Z WARN  primary::proposer] Timer expired for round 63
+[2025-03-08T08:34:57.168Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:58.168Z WARN  primary::proposer] Timer expired for round 65
+[2025-03-08T08:34:58.168Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:34:59.170Z WARN  primary::proposer] Timer expired for round 66
+[2025-03-08T08:34:59.170Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:00.171Z WARN  primary::proposer] Timer expired for round 67
+[2025-03-08T08:35:00.171Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:01.171Z WARN  primary::proposer] Timer expired for round 69
+[2025-03-08T08:35:01.171Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:02.173Z WARN  primary::proposer] Timer expired for round 70
+[2025-03-08T08:35:02.173Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:03.173Z WARN  primary::proposer] Timer expired for round 71
+[2025-03-08T08:35:03.173Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:04.175Z WARN  primary::proposer] Timer expired for round 73
+[2025-03-08T08:35:04.175Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:05.175Z WARN  primary::proposer] Timer expired for round 74
+[2025-03-08T08:35:05.175Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:06.176Z WARN  primary::proposer] Timer expired for round 75
+[2025-03-08T08:35:06.177Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:07.178Z WARN  primary::proposer] Timer expired for round 77
+[2025-03-08T08:35:07.178Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:08.179Z WARN  primary::proposer] Timer expired for round 78
+[2025-03-08T08:35:08.179Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:09.180Z WARN  primary::proposer] Timer expired for round 79
+[2025-03-08T08:35:09.181Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:10.182Z WARN  primary::proposer] Timer expired for round 81
+[2025-03-08T08:35:10.182Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:11.182Z WARN  primary::proposer] Timer expired for round 82
+[2025-03-08T08:35:11.182Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:12.184Z WARN  primary::proposer] Timer expired for round 83
+[2025-03-08T08:35:12.184Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:13.184Z WARN  primary::proposer] Timer expired for round 85
+[2025-03-08T08:35:13.185Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:14.185Z WARN  primary::proposer] Timer expired for round 86
+[2025-03-08T08:35:14.185Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:15.186Z WARN  primary::proposer] Timer expired for round 87
+[2025-03-08T08:35:15.186Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:16.187Z WARN  primary::proposer] Timer expired for round 89
+[2025-03-08T08:35:16.187Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:17.189Z WARN  primary::proposer] Timer expired for round 90
+[2025-03-08T08:35:17.189Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:18.190Z WARN  primary::proposer] Timer expired for round 91
+[2025-03-08T08:35:18.190Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:19.192Z WARN  primary::proposer] Timer expired for round 93
+[2025-03-08T08:35:19.192Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:20.193Z WARN  primary::proposer] Timer expired for round 94
+[2025-03-08T08:35:20.193Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:21.193Z WARN  primary::proposer] Timer expired for round 95
+[2025-03-08T08:35:21.193Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:22.195Z WARN  primary::proposer] Timer expired for round 97
+[2025-03-08T08:35:22.195Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:23.195Z WARN  primary::proposer] Timer expired for round 98
+[2025-03-08T08:35:23.195Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:24.197Z WARN  primary::proposer] Timer expired for round 99
+[2025-03-08T08:35:24.197Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:25.197Z WARN  primary::proposer] Timer expired for round 101
+[2025-03-08T08:35:25.197Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:26.199Z WARN  primary::proposer] Timer expired for round 102
+[2025-03-08T08:35:26.199Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:27.199Z WARN  primary::proposer] Timer expired for round 103
+[2025-03-08T08:35:27.199Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:28.201Z WARN  primary::proposer] Timer expired for round 105
+[2025-03-08T08:35:28.201Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:29.202Z WARN  primary::proposer] Timer expired for round 106
+[2025-03-08T08:35:29.202Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:30.203Z WARN  primary::proposer] Timer expired for round 107
+[2025-03-08T08:35:30.203Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:31.203Z WARN  primary::proposer] Timer expired for round 109
+[2025-03-08T08:35:31.203Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:32.205Z WARN  primary::proposer] Timer expired for round 110
+[2025-03-08T08:35:32.205Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:33.205Z WARN  primary::proposer] Timer expired for round 111
+[2025-03-08T08:35:33.205Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:34.207Z WARN  primary::proposer] Timer expired for round 113
+[2025-03-08T08:35:34.207Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:35.207Z WARN  primary::proposer] Timer expired for round 114
+[2025-03-08T08:35:35.207Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:36.209Z WARN  primary::proposer] Timer expired for round 115
+[2025-03-08T08:35:36.209Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:37.210Z WARN  primary::proposer] Timer expired for round 117
+[2025-03-08T08:35:37.210Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:38.211Z WARN  primary::proposer] Timer expired for round 118
+[2025-03-08T08:35:38.211Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:39.213Z WARN  primary::proposer] Timer expired for round 119
+[2025-03-08T08:35:39.213Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:40.213Z WARN  primary::proposer] Timer expired for round 121
+[2025-03-08T08:35:40.213Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:41.215Z WARN  primary::proposer] Timer expired for round 122
+[2025-03-08T08:35:41.215Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:42.217Z WARN  primary::proposer] Timer expired for round 123
+[2025-03-08T08:35:42.217Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:43.218Z WARN  primary::proposer] Timer expired for round 125
+[2025-03-08T08:35:43.218Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:44.218Z WARN  primary::proposer] Timer expired for round 126
+[2025-03-08T08:35:44.218Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:45.220Z WARN  primary::proposer] Timer expired for round 127
+[2025-03-08T08:35:45.220Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:46.220Z WARN  primary::proposer] Timer expired for round 129
+[2025-03-08T08:35:46.220Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:47.222Z WARN  primary::proposer] Timer expired for round 130
+[2025-03-08T08:35:47.222Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:48.224Z WARN  primary::proposer] Timer expired for round 131
+[2025-03-08T08:35:48.224Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:49.224Z WARN  primary::proposer] Timer expired for round 133
+[2025-03-08T08:35:49.224Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:50.226Z WARN  primary::proposer] Timer expired for round 134
+[2025-03-08T08:35:50.226Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:51.226Z WARN  primary::proposer] Timer expired for round 135
+[2025-03-08T08:35:51.226Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:52.228Z WARN  primary::proposer] Timer expired for round 137
+[2025-03-08T08:35:52.228Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:53.228Z WARN  primary::proposer] Timer expired for round 138
+[2025-03-08T08:35:53.228Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:54.230Z WARN  primary::proposer] Timer expired for round 139
+[2025-03-08T08:35:54.230Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:55.230Z WARN  primary::proposer] Timer expired for round 141
+[2025-03-08T08:35:55.230Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:56.232Z WARN  primary::proposer] Timer expired for round 142
+[2025-03-08T08:35:56.232Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:57.232Z WARN  primary::proposer] Timer expired for round 143
+[2025-03-08T08:35:57.232Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:58.233Z WARN  primary::proposer] Timer expired for round 145
+[2025-03-08T08:35:58.233Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:35:59.235Z WARN  primary::proposer] Timer expired for round 146
+[2025-03-08T08:35:59.235Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:00.236Z WARN  primary::proposer] Timer expired for round 147
+[2025-03-08T08:36:00.236Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:01.238Z WARN  primary::proposer] Timer expired for round 149
+[2025-03-08T08:36:01.238Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:02.238Z WARN  primary::proposer] Timer expired for round 150
+[2025-03-08T08:36:02.238Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:03.240Z WARN  primary::proposer] Timer expired for round 151
+[2025-03-08T08:36:03.240Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:04.241Z WARN  primary::proposer] Timer expired for round 153
+[2025-03-08T08:36:04.241Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:05.241Z WARN  primary::proposer] Timer expired for round 154
+[2025-03-08T08:36:05.241Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:06.242Z WARN  primary::proposer] Timer expired for round 155
+[2025-03-08T08:36:06.242Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:07.243Z WARN  primary::proposer] Timer expired for round 157
+[2025-03-08T08:36:07.243Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:08.245Z WARN  primary::proposer] Timer expired for round 158
+[2025-03-08T08:36:08.245Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:09.245Z WARN  primary::proposer] Timer expired for round 159
+[2025-03-08T08:36:09.245Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:10.247Z WARN  primary::proposer] Timer expired for round 161
+[2025-03-08T08:36:10.247Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:11.247Z WARN  primary::proposer] Timer expired for round 162
+[2025-03-08T08:36:11.247Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:12.249Z WARN  primary::proposer] Timer expired for round 163
+[2025-03-08T08:36:12.249Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:13.249Z WARN  primary::proposer] Timer expired for round 165
+[2025-03-08T08:36:13.249Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:14.251Z WARN  primary::proposer] Timer expired for round 166
+[2025-03-08T08:36:14.251Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:15.251Z WARN  primary::proposer] Timer expired for round 167
+[2025-03-08T08:36:15.251Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:16.253Z WARN  primary::proposer] Timer expired for round 169
+[2025-03-08T08:36:16.253Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:17.253Z WARN  primary::proposer] Timer expired for round 170
+[2025-03-08T08:36:17.253Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:18.254Z WARN  primary::proposer] Timer expired for round 171
+[2025-03-08T08:36:18.254Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:19.256Z WARN  primary::proposer] Timer expired for round 173
+[2025-03-08T08:36:19.256Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:20.257Z WARN  primary::proposer] Timer expired for round 174
+[2025-03-08T08:36:20.257Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:21.258Z WARN  primary::proposer] Timer expired for round 175
+[2025-03-08T08:36:21.258Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:22.260Z WARN  primary::proposer] Timer expired for round 177
+[2025-03-08T08:36:22.260Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:23.261Z WARN  primary::proposer] Timer expired for round 178
+[2025-03-08T08:36:23.261Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:24.262Z WARN  primary::proposer] Timer expired for round 179
+[2025-03-08T08:36:24.262Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:25.264Z WARN  primary::proposer] Timer expired for round 181
+[2025-03-08T08:36:25.264Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:26.265Z WARN  primary::proposer] Timer expired for round 182
+[2025-03-08T08:36:26.265Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:27.266Z WARN  primary::proposer] Timer expired for round 183
+[2025-03-08T08:36:27.266Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:28.268Z WARN  primary::proposer] Timer expired for round 185
+[2025-03-08T08:36:28.268Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:29.269Z WARN  primary::proposer] Timer expired for round 186
+[2025-03-08T08:36:29.269Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:30.270Z WARN  primary::proposer] Timer expired for round 187
+[2025-03-08T08:36:30.270Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:31.272Z WARN  primary::proposer] Timer expired for round 189
+[2025-03-08T08:36:31.272Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:32.273Z WARN  primary::proposer] Timer expired for round 190
+[2025-03-08T08:36:32.273Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:33.274Z WARN  primary::proposer] Timer expired for round 191
+[2025-03-08T08:36:33.275Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:34.276Z WARN  primary::proposer] Timer expired for round 193
+[2025-03-08T08:36:34.276Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:35.277Z WARN  primary::proposer] Timer expired for round 194
+[2025-03-08T08:36:35.277Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:36.278Z WARN  primary::proposer] Timer expired for round 195
+[2025-03-08T08:36:36.278Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:37.279Z WARN  primary::proposer] Timer expired for round 197
+[2025-03-08T08:36:37.279Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:38.281Z WARN  primary::proposer] Timer expired for round 198
+[2025-03-08T08:36:38.281Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:39.282Z WARN  primary::proposer] Timer expired for round 199
+[2025-03-08T08:36:39.282Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:40.283Z WARN  primary::proposer] Timer expired for round 201
+[2025-03-08T08:36:40.283Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:41.285Z WARN  primary::proposer] Timer expired for round 202
+[2025-03-08T08:36:41.285Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:42.286Z WARN  primary::proposer] Timer expired for round 203
+[2025-03-08T08:36:42.286Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:43.286Z WARN  primary::proposer] Timer expired for round 205
+[2025-03-08T08:36:43.286Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:44.287Z WARN  primary::proposer] Timer expired for round 206
+[2025-03-08T08:36:44.288Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:45.289Z WARN  primary::proposer] Timer expired for round 207
+[2025-03-08T08:36:45.289Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:46.290Z WARN  primary::proposer] Timer expired for round 209
+[2025-03-08T08:36:46.290Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:47.292Z WARN  primary::proposer] Timer expired for round 210
+[2025-03-08T08:36:47.292Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:48.292Z WARN  primary::proposer] Timer expired for round 211
+[2025-03-08T08:36:48.292Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:49.294Z WARN  primary::proposer] Timer expired for round 213
+[2025-03-08T08:36:49.294Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:50.294Z WARN  primary::proposer] Timer expired for round 214
+[2025-03-08T08:36:50.294Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:51.295Z WARN  primary::proposer] Timer expired for round 215
+[2025-03-08T08:36:51.296Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:52.297Z WARN  primary::proposer] Timer expired for round 217
+[2025-03-08T08:36:52.297Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:53.298Z WARN  primary::proposer] Timer expired for round 218
+[2025-03-08T08:36:53.298Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:54.299Z WARN  primary::proposer] Timer expired for round 219
+[2025-03-08T08:36:54.299Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:55.300Z WARN  primary::proposer] Timer expired for round 221
+[2025-03-08T08:36:55.300Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:56.301Z WARN  primary::proposer] Timer expired for round 222
+[2025-03-08T08:36:56.301Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:57.303Z WARN  primary::proposer] Timer expired for round 223
+[2025-03-08T08:36:57.303Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:58.303Z WARN  primary::proposer] Timer expired for round 225
+[2025-03-08T08:36:58.303Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:36:59.304Z WARN  primary::proposer] Timer expired for round 226
+[2025-03-08T08:36:59.304Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:00.306Z WARN  primary::proposer] Timer expired for round 227
+[2025-03-08T08:37:00.306Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:01.307Z WARN  primary::proposer] Timer expired for round 229
+[2025-03-08T08:37:01.307Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:02.307Z WARN  primary::proposer] Timer expired for round 230
+[2025-03-08T08:37:02.307Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:03.308Z WARN  primary::proposer] Timer expired for round 231
+[2025-03-08T08:37:03.308Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:04.310Z WARN  primary::proposer] Timer expired for round 233
+[2025-03-08T08:37:04.310Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:05.311Z WARN  primary::proposer] Timer expired for round 234
+[2025-03-08T08:37:05.311Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:06.311Z WARN  primary::proposer] Timer expired for round 235
+[2025-03-08T08:37:06.311Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:07.312Z WARN  primary::proposer] Timer expired for round 237
+[2025-03-08T08:37:07.312Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:08.314Z WARN  primary::proposer] Timer expired for round 238
+[2025-03-08T08:37:08.314Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:09.315Z WARN  primary::proposer] Timer expired for round 239
+[2025-03-08T08:37:09.315Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:10.316Z WARN  primary::proposer] Timer expired for round 241
+[2025-03-08T08:37:10.317Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:11.318Z WARN  primary::proposer] Timer expired for round 242
+[2025-03-08T08:37:11.318Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:12.319Z WARN  primary::proposer] Timer expired for round 243
+[2025-03-08T08:37:12.319Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:13.320Z WARN  primary::proposer] Timer expired for round 245
+[2025-03-08T08:37:13.320Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:14.322Z WARN  primary::proposer] Timer expired for round 246
+[2025-03-08T08:37:14.322Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:15.322Z WARN  primary::proposer] Timer expired for round 247
+[2025-03-08T08:37:15.322Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:16.324Z WARN  primary::proposer] Timer expired for round 249
+[2025-03-08T08:37:16.324Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:17.324Z WARN  primary::proposer] Timer expired for round 250
+[2025-03-08T08:37:17.324Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:18.326Z WARN  primary::proposer] Timer expired for round 251
+[2025-03-08T08:37:18.326Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:19.327Z WARN  primary::proposer] Timer expired for round 253
+[2025-03-08T08:37:19.327Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:20.328Z WARN  primary::proposer] Timer expired for round 254
+[2025-03-08T08:37:20.328Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:21.329Z WARN  primary::proposer] Timer expired for round 255
+[2025-03-08T08:37:21.330Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:22.331Z WARN  primary::proposer] Timer expired for round 257
+[2025-03-08T08:37:22.331Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:23.331Z WARN  primary::proposer] Timer expired for round 258
+[2025-03-08T08:37:23.331Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:24.333Z WARN  primary::proposer] Timer expired for round 259
+[2025-03-08T08:37:24.333Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:25.334Z WARN  primary::proposer] Timer expired for round 261
+[2025-03-08T08:37:25.334Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:26.336Z WARN  primary::proposer] Timer expired for round 262
+[2025-03-08T08:37:26.336Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:27.337Z WARN  primary::proposer] Timer expired for round 263
+[2025-03-08T08:37:27.337Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:28.339Z WARN  primary::proposer] Timer expired for round 265
+[2025-03-08T08:37:28.339Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:29.339Z WARN  primary::proposer] Timer expired for round 266
+[2025-03-08T08:37:29.339Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:30.341Z WARN  primary::proposer] Timer expired for round 267
+[2025-03-08T08:37:30.341Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:31.341Z WARN  primary::proposer] Timer expired for round 269
+[2025-03-08T08:37:31.341Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:32.343Z WARN  primary::proposer] Timer expired for round 270
+[2025-03-08T08:37:32.343Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:33.344Z WARN  primary::proposer] Timer expired for round 271
+[2025-03-08T08:37:33.344Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:34.344Z WARN  primary::proposer] Timer expired for round 273
+[2025-03-08T08:37:34.344Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:35.345Z WARN  primary::proposer] Timer expired for round 274
+[2025-03-08T08:37:35.345Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:36.347Z WARN  primary::proposer] Timer expired for round 275
+[2025-03-08T08:37:36.347Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:37.348Z WARN  primary::proposer] Timer expired for round 277
+[2025-03-08T08:37:37.348Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:38.349Z WARN  primary::proposer] Timer expired for round 278
+[2025-03-08T08:37:38.350Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:39.350Z WARN  primary::proposer] Timer expired for round 279
+[2025-03-08T08:37:39.350Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:40.352Z WARN  primary::proposer] Timer expired for round 281
+[2025-03-08T08:37:40.352Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:41.353Z WARN  primary::proposer] Timer expired for round 282
+[2025-03-08T08:37:41.353Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:42.354Z WARN  primary::proposer] Timer expired for round 283
+[2025-03-08T08:37:42.354Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:43.356Z WARN  primary::proposer] Timer expired for round 285
+[2025-03-08T08:37:43.356Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:44.356Z WARN  primary::proposer] Timer expired for round 286
+[2025-03-08T08:37:44.356Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:45.358Z WARN  primary::proposer] Timer expired for round 287
+[2025-03-08T08:37:45.358Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:46.360Z WARN  primary::proposer] Timer expired for round 289
+[2025-03-08T08:37:46.360Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:47.360Z WARN  primary::proposer] Timer expired for round 290
+[2025-03-08T08:37:47.360Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:48.362Z WARN  primary::proposer] Timer expired for round 291
+[2025-03-08T08:37:48.362Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:49.362Z WARN  primary::proposer] Timer expired for round 293
+[2025-03-08T08:37:49.362Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:50.364Z WARN  primary::proposer] Timer expired for round 294
+[2025-03-08T08:37:50.364Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:51.364Z WARN  primary::proposer] Timer expired for round 295
+[2025-03-08T08:37:51.364Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:52.365Z WARN  primary::proposer] Timer expired for round 297
+[2025-03-08T08:37:52.365Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:53.366Z WARN  primary::proposer] Timer expired for round 298
+[2025-03-08T08:37:53.366Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:54.368Z WARN  primary::proposer] Timer expired for round 299
+[2025-03-08T08:37:54.368Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:55.368Z WARN  primary::proposer] Timer expired for round 301
+[2025-03-08T08:37:55.368Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:56.370Z WARN  primary::proposer] Timer expired for round 302
+[2025-03-08T08:37:56.370Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:57.371Z WARN  primary::proposer] Timer expired for round 303
+[2025-03-08T08:37:57.371Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:58.372Z WARN  primary::proposer] Timer expired for round 305
+[2025-03-08T08:37:58.372Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:37:59.373Z WARN  primary::proposer] Timer expired for round 306
+[2025-03-08T08:37:59.373Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:00.375Z WARN  primary::proposer] Timer expired for round 307
+[2025-03-08T08:38:00.375Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:01.375Z WARN  primary::proposer] Timer expired for round 309
+[2025-03-08T08:38:01.375Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:02.377Z WARN  primary::proposer] Timer expired for round 310
+[2025-03-08T08:38:02.377Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:03.377Z WARN  primary::proposer] Timer expired for round 311
+[2025-03-08T08:38:03.377Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:04.379Z WARN  primary::proposer] Timer expired for round 313
+[2025-03-08T08:38:04.379Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:05.379Z WARN  primary::proposer] Timer expired for round 314
+[2025-03-08T08:38:05.379Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:06.381Z WARN  primary::proposer] Timer expired for round 315
+[2025-03-08T08:38:06.381Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:07.381Z WARN  primary::proposer] Timer expired for round 317
+[2025-03-08T08:38:07.381Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:08.383Z WARN  primary::proposer] Timer expired for round 318
+[2025-03-08T08:38:08.383Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:09.383Z WARN  primary::proposer] Timer expired for round 319
+[2025-03-08T08:38:09.383Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:10.385Z WARN  primary::proposer] Timer expired for round 321
+[2025-03-08T08:38:10.385Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:11.385Z WARN  primary::proposer] Timer expired for round 322
+[2025-03-08T08:38:11.385Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:12.387Z WARN  primary::proposer] Timer expired for round 323
+[2025-03-08T08:38:12.387Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:13.387Z WARN  primary::proposer] Timer expired for round 325
+[2025-03-08T08:38:13.387Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:14.388Z WARN  primary::proposer] Timer expired for round 326
+[2025-03-08T08:38:14.388Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:15.389Z WARN  primary::proposer] Timer expired for round 327
+[2025-03-08T08:38:15.389Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:16.391Z WARN  primary::proposer] Timer expired for round 329
+[2025-03-08T08:38:16.391Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:17.391Z WARN  primary::proposer] Timer expired for round 330
+[2025-03-08T08:38:17.391Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:18.393Z WARN  primary::proposer] Timer expired for round 331
+[2025-03-08T08:38:18.393Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:19.393Z WARN  primary::proposer] Timer expired for round 333
+[2025-03-08T08:38:19.393Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:20.395Z WARN  primary::proposer] Timer expired for round 334
+[2025-03-08T08:38:20.395Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:21.395Z WARN  primary::proposer] Timer expired for round 335
+[2025-03-08T08:38:21.395Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:22.397Z WARN  primary::proposer] Timer expired for round 337
+[2025-03-08T08:38:22.397Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:23.397Z WARN  primary::proposer] Timer expired for round 338
+[2025-03-08T08:38:23.397Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:24.399Z WARN  primary::proposer] Timer expired for round 339
+[2025-03-08T08:38:24.399Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:25.399Z WARN  primary::proposer] Timer expired for round 341
+[2025-03-08T08:38:25.399Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:26.401Z WARN  primary::proposer] Timer expired for round 342
+[2025-03-08T08:38:26.401Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:27.401Z WARN  primary::proposer] Timer expired for round 343
+[2025-03-08T08:38:27.401Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:28.402Z WARN  primary::proposer] Timer expired for round 345
+[2025-03-08T08:38:28.402Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:29.403Z WARN  primary::proposer] Timer expired for round 346
+[2025-03-08T08:38:29.404Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:30.404Z WARN  primary::proposer] Timer expired for round 347
+[2025-03-08T08:38:30.404Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:31.405Z WARN  primary::proposer] Timer expired for round 349
+[2025-03-08T08:38:31.405Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:32.407Z WARN  primary::proposer] Timer expired for round 350
+[2025-03-08T08:38:32.407Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:33.407Z WARN  primary::proposer] Timer expired for round 351
+[2025-03-08T08:38:33.407Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:34.409Z WARN  primary::proposer] Timer expired for round 353
+[2025-03-08T08:38:34.409Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:35.409Z WARN  primary::proposer] Timer expired for round 354
+[2025-03-08T08:38:35.409Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:36.411Z WARN  primary::proposer] Timer expired for round 355
+[2025-03-08T08:38:36.411Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:37.411Z WARN  primary::proposer] Timer expired for round 357
+[2025-03-08T08:38:37.411Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:38.413Z WARN  primary::proposer] Timer expired for round 358
+[2025-03-08T08:38:38.413Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:39.413Z WARN  primary::proposer] Timer expired for round 359
+[2025-03-08T08:38:39.413Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:40.415Z WARN  primary::proposer] Timer expired for round 361
+[2025-03-08T08:38:40.415Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:41.415Z WARN  primary::proposer] Timer expired for round 362
+[2025-03-08T08:38:41.415Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:42.416Z WARN  primary::proposer] Timer expired for round 363
+[2025-03-08T08:38:42.416Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:43.418Z WARN  primary::proposer] Timer expired for round 365
+[2025-03-08T08:38:43.418Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:44.419Z WARN  primary::proposer] Timer expired for round 366
+[2025-03-08T08:38:44.419Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:45.421Z WARN  primary::proposer] Timer expired for round 367
+[2025-03-08T08:38:45.421Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:46.421Z WARN  primary::proposer] Timer expired for round 369
+[2025-03-08T08:38:46.422Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:47.423Z WARN  primary::proposer] Timer expired for round 370
+[2025-03-08T08:38:47.423Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:48.423Z WARN  primary::proposer] Timer expired for round 371
+[2025-03-08T08:38:48.423Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:49.425Z WARN  primary::proposer] Timer expired for round 373
+[2025-03-08T08:38:49.425Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:50.425Z WARN  primary::proposer] Timer expired for round 374
+[2025-03-08T08:38:50.425Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:51.426Z WARN  primary::proposer] Timer expired for round 375
+[2025-03-08T08:38:51.427Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:52.427Z WARN  primary::proposer] Timer expired for round 377
+[2025-03-08T08:38:52.427Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:53.429Z WARN  primary::proposer] Timer expired for round 378
+[2025-03-08T08:38:53.429Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:54.430Z WARN  primary::proposer] Timer expired for round 379
+[2025-03-08T08:38:54.430Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:55.432Z WARN  primary::proposer] Timer expired for round 381
+[2025-03-08T08:38:55.432Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:56.432Z WARN  primary::proposer] Timer expired for round 382
+[2025-03-08T08:38:56.432Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:57.433Z WARN  primary::proposer] Timer expired for round 383
+[2025-03-08T08:38:57.433Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:58.435Z WARN  primary::proposer] Timer expired for round 385
+[2025-03-08T08:38:58.435Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:38:59.435Z WARN  primary::proposer] Timer expired for round 386
+[2025-03-08T08:38:59.435Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:00.436Z WARN  primary::proposer] Timer expired for round 387
+[2025-03-08T08:39:00.436Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:01.438Z WARN  primary::proposer] Timer expired for round 389
+[2025-03-08T08:39:01.438Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:02.438Z WARN  primary::proposer] Timer expired for round 390
+[2025-03-08T08:39:02.438Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:03.440Z WARN  primary::proposer] Timer expired for round 391
+[2025-03-08T08:39:03.440Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:04.440Z WARN  primary::proposer] Timer expired for round 393
+[2025-03-08T08:39:04.440Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:05.442Z WARN  primary::proposer] Timer expired for round 394
+[2025-03-08T08:39:05.442Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:06.443Z WARN  primary::proposer] Timer expired for round 395
+[2025-03-08T08:39:06.443Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:07.443Z WARN  primary::proposer] Timer expired for round 397
+[2025-03-08T08:39:07.443Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:08.445Z WARN  primary::proposer] Timer expired for round 398
+[2025-03-08T08:39:08.445Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:09.446Z WARN  primary::proposer] Timer expired for round 399
+[2025-03-08T08:39:09.446Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:10.446Z WARN  primary::proposer] Timer expired for round 401
+[2025-03-08T08:39:10.446Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:11.447Z WARN  primary::proposer] Timer expired for round 402
+[2025-03-08T08:39:11.447Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:12.449Z WARN  primary::proposer] Timer expired for round 403
+[2025-03-08T08:39:12.449Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:13.449Z WARN  primary::proposer] Timer expired for round 405
+[2025-03-08T08:39:13.449Z INFO  primary::proposer] Package 0 batches into new header
+[2025-03-08T08:39:13.571Z WARN  network::receiver] Connection closed by peer 47.243.168.208:35934
+[2025-03-08T08:39:13.571Z WARN  network::reliable_sender] Receive unexpected ACK from 47.243.168.208:5000
+[2025-03-08T08:39:13.571Z WARN  network::simple_sender] Failed to receive ACK from 47.243.168.208:5000
+[2025-03-08T08:39:13.571Z WARN  network::receiver] Connection closed by peer 47.243.168.208:35948
+[2025-03-08T08:39:13.571Z WARN  network::reliable_sender] Failed to connect to 47.243.168.208:5000 (retry 0): Connection refused (os error 111)

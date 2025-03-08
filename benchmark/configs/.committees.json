@@ -1,0 +1,263 @@
+{
+    "client": "47.243.109.254:5000",
+    "shard_num": 4,
+    "shard_size": 4,
+    "shards": {
+        "0": {
+            "authorities": {
+                "+8roLoZUMw7Jwfee05wQ+JsksFNzKbUPb1LF2rP6Alk=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5006",
+                        "worker_to_primary": "47.243.165.254:5007"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5011",
+                            "primary_to_worker": "47.243.165.254:5008",
+                            "transactions": "47.243.165.254:5009",
+                            "worker_to_worker": "47.243.165.254:5010"
+                        }
+                    }
+                },
+                "+tlmDOJIHHFwt+r3W565pzV4tZVwGFzo4aFFzfqjpbw=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5006",
+                        "worker_to_primary": "47.243.168.208:5007"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5011",
+                            "primary_to_worker": "47.243.168.208:5008",
+                            "transactions": "47.243.168.208:5009",
+                            "worker_to_worker": "47.243.168.208:5010"
+                        }
+                    }
+                },
+                "BzcG2Wrc7EtxkRiaoQIE8GGjE0Sv2ZL6GMsMWBzoNSA=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5000",
+                        "worker_to_primary": "47.243.165.254:5001"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5005",
+                            "primary_to_worker": "47.243.165.254:5002",
+                            "transactions": "47.243.165.254:5003",
+                            "worker_to_worker": "47.243.165.254:5004"
+                        }
+                    }
+                },
+                "WukVxEx2CB506JI0atdljeZAL06qpIjLvmsulfT2Vnw=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5000",
+                        "worker_to_primary": "47.243.168.208:5001"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5005",
+                            "primary_to_worker": "47.243.168.208:5002",
+                            "transactions": "47.243.168.208:5003",
+                            "worker_to_worker": "47.243.168.208:5004"
+                        }
+                    }
+                }
+            }
+        },
+        "1": {
+            "authorities": {
+                "KE4Wt6W1rbSEmMKtVnRO36TXAzI4dhYubIC8YuFQgHY=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5018",
+                        "worker_to_primary": "47.243.165.254:5019"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5023",
+                            "primary_to_worker": "47.243.165.254:5020",
+                            "transactions": "47.243.165.254:5021",
+                            "worker_to_worker": "47.243.165.254:5022"
+                        }
+                    }
+                },
+                "P/MA7UIZZbgzGhWZ+JMF+SnvyVkbXIomCnmKhv9Ki6A=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5018",
+                        "worker_to_primary": "47.243.168.208:5019"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5023",
+                            "primary_to_worker": "47.243.168.208:5020",
+                            "transactions": "47.243.168.208:5021",
+                            "worker_to_worker": "47.243.168.208:5022"
+                        }
+                    }
+                },
+                "RPQbKac2p+bGlf86BTDF1ZvSzRWADU9rwqmBlzcGhyk=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5012",
+                        "worker_to_primary": "47.243.168.208:5013"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5017",
+                            "primary_to_worker": "47.243.168.208:5014",
+                            "transactions": "47.243.168.208:5015",
+                            "worker_to_worker": "47.243.168.208:5016"
+                        }
+                    }
+                },
+                "tD10T40nHT8asm8DQ8ep+rIyyY3xFj+wctxXozcf0EU=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5012",
+                        "worker_to_primary": "47.243.165.254:5013"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5017",
+                            "primary_to_worker": "47.243.165.254:5014",
+                            "transactions": "47.243.165.254:5015",
+                            "worker_to_worker": "47.243.165.254:5016"
+                        }
+                    }
+                }
+            }
+        },
+        "2": {
+            "authorities": {
+                "IzAWXHeLyEkaq4B0xgy7XAFa1C/gelE6HCGYBTIqY8Q=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5024",
+                        "worker_to_primary": "47.243.165.254:5025"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5029",
+                            "primary_to_worker": "47.243.165.254:5026",
+                            "transactions": "47.243.165.254:5027",
+                            "worker_to_worker": "47.243.165.254:5028"
+                        }
+                    }
+                },
+                "Vtc+z3uiYOBfZKtLM1o18G6tREHkDeh+UOHwWrAgnEQ=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5030",
+                        "worker_to_primary": "47.243.165.254:5031"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5035",
+                            "primary_to_worker": "47.243.165.254:5032",
+                            "transactions": "47.243.165.254:5033",
+                            "worker_to_worker": "47.243.165.254:5034"
+                        }
+                    }
+                },
+                "d/io0aNLuo8x0kwPlzWLNBxlxucje0Ay34YbKY0QpqA=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5030",
+                        "worker_to_primary": "47.243.168.208:5031"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5035",
+                            "primary_to_worker": "47.243.168.208:5032",
+                            "transactions": "47.243.168.208:5033",
+                            "worker_to_worker": "47.243.168.208:5034"
+                        }
+                    }
+                },
+                "y6pnuJjaMYa8yKzuMs3TLgtbcbiTYDU6OvXyefiemco=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5024",
+                        "worker_to_primary": "47.243.168.208:5025"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5029",
+                            "primary_to_worker": "47.243.168.208:5026",
+                            "transactions": "47.243.168.208:5027",
+                            "worker_to_worker": "47.243.168.208:5028"
+                        }
+                    }
+                }
+            }
+        },
+        "3": {
+            "authorities": {
+                "4Ug3EqVlD8DJZLhiF4/Pj+pNC1I0PprWUvkMyzM4Kbs=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5036",
+                        "worker_to_primary": "47.243.165.254:5037"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5041",
+                            "primary_to_worker": "47.243.165.254:5038",
+                            "transactions": "47.243.165.254:5039",
+                            "worker_to_worker": "47.243.165.254:5040"
+                        }
+                    }
+                },
+                "5A5SwnCJ81SmKR6bm0/gkxKX3EyDMXlwAy2y+9owbww=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5042",
+                        "worker_to_primary": "47.243.168.208:5043"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5047",
+                            "primary_to_worker": "47.243.168.208:5044",
+                            "transactions": "47.243.168.208:5045",
+                            "worker_to_worker": "47.243.168.208:5046"
+                        }
+                    }
+                },
+                "Exs945q8D+bvJIluAfFbVWFgM7TG69hYnhPfXpTeHjY=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.168.208:5036",
+                        "worker_to_primary": "47.243.168.208:5037"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.168.208:5041",
+                            "primary_to_worker": "47.243.168.208:5038",
+                            "transactions": "47.243.168.208:5039",
+                            "worker_to_worker": "47.243.168.208:5040"
+                        }
+                    }
+                },
+                "abUkMt/njFMQxBlNTJANiH3U0auuef4vlD86dMTgIfo=": {
+                    "primary": {
+                        "primary_to_primary": "47.243.165.254:5042",
+                        "worker_to_primary": "47.243.165.254:5043"
+                    },
+                    "stake": 1,
+                    "workers": {
+                        "0": {
+                            "cross_shard_worker": "47.243.165.254:5047",
+                            "primary_to_worker": "47.243.165.254:5044",
+                            "transactions": "47.243.165.254:5045",
+                            "worker_to_worker": "47.243.165.254:5046"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

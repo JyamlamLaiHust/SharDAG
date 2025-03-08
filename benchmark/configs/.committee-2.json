@@ -1,0 +1,64 @@
+{
+    "authorities": {
+        "IzAWXHeLyEkaq4B0xgy7XAFa1C/gelE6HCGYBTIqY8Q=": {
+            "primary": {
+                "primary_to_primary": "47.243.165.254:5024",
+                "worker_to_primary": "47.243.165.254:5025"
+            },
+            "stake": 1,
+            "workers": {
+                "0": {
+                    "cross_shard_worker": "47.243.165.254:5029",
+                    "primary_to_worker": "47.243.165.254:5026",
+                    "transactions": "47.243.165.254:5027",
+                    "worker_to_worker": "47.243.165.254:5028"
+                }
+            }
+        },
+        "Vtc+z3uiYOBfZKtLM1o18G6tREHkDeh+UOHwWrAgnEQ=": {
+            "primary": {
+                "primary_to_primary": "47.243.165.254:5030",
+                "worker_to_primary": "47.243.165.254:5031"
+            },
+            "stake": 1,
+            "workers": {
+                "0": {
+                    "cross_shard_worker": "47.243.165.254:5035",
+                    "primary_to_worker": "47.243.165.254:5032",
+                    "transactions": "47.243.165.254:5033",
+                    "worker_to_worker": "47.243.165.254:5034"
+                }
+            }
+        },
+        "d/io0aNLuo8x0kwPlzWLNBxlxucje0Ay34YbKY0QpqA=": {
+            "primary": {
+                "primary_to_primary": "47.243.168.208:5030",
+                "worker_to_primary": "47.243.168.208:5031"
+            },
+            "stake": 1,
+            "workers": {
+                "0": {
+                    "cross_shard_worker": "47.243.168.208:5035",
+                    "primary_to_worker": "47.243.168.208:5032",
+                    "transactions": "47.243.168.208:5033",
+                    "worker_to_worker": "47.243.168.208:5034"
+                }
+            }
+        },
+        "y6pnuJjaMYa8yKzuMs3TLgtbcbiTYDU6OvXyefiemco=": {
+            "primary": {
+                "primary_to_primary": "47.243.168.208:5024",
+                "worker_to_primary": "47.243.168.208:5025"
+            },
+            "stake": 1,
+            "workers": {
+                "0": {
+                    "cross_shard_worker": "47.243.168.208:5029",
+                    "primary_to_worker": "47.243.168.208:5026",
+                    "transactions": "47.243.168.208:5027",
+                    "worker_to_worker": "47.243.168.208:5028"
+                }
+            }
+        }
+    }
+}

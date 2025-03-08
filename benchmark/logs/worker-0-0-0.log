@@ -1,0 +1,68 @@
+[2025-03-08T08:34:09.928Z INFO  node] cs_faults: 3
+[2025-03-08T08:34:09.928Z INFO  node] is_cs_fault: 1
+[2025-03-08T08:34:09.928Z INFO  node] Epoch: 1
+[2025-03-08T08:34:09.928Z INFO  node] acc2shard_file: "/root/SharDAG/test-workload/default-acc2shard.csv"
+[2025-03-08T08:34:09.928Z INFO  node] actacc2shard_file: "0"
+[2025-03-08T08:34:09.928Z INFO  node] acc_shard_type: HashPolicy
+[2025-03-08T08:34:09.928Z INFO  node] executor_type: BrokerChain
+[2025-03-08T08:34:09.928Z INFO  node] state_store_type: MStore
+[2025-03-08T08:34:09.928Z INFO  node] append_type: Serial 
+[2025-03-08T08:34:09.928Z INFO  worker::acc_shard] Initialize Account2ShardHash...
+[2025-03-08T08:34:09.928Z INFO  worker::acc_shard] Done...
+initialize MStore
+[2025-03-08T08:34:09.928Z INFO  worker::state_store] Initialize MStore!
+[2025-03-08T08:34:09.940Z INFO  worker::state_store] Begin loading account...
+Begin loading account...
+[2025-03-08T08:34:09.940Z INFO  worker::state_store] Total 0 accounts for initializing current epoch from acc2shard_file! load 0 local accounts, take 0 ms
+Total 0 accounts for initializing current epoch from acc2shard_file! load 0 local accounts, take 0 ms
+[2025-03-08T08:34:09.941Z INFO  worker::worker] [Shard config] Shard num: 4, Shard size: 4
+[2025-03-08T08:34:09.941Z INFO  worker::worker] [Node info] Node (0, 2), Publickey: WukVxEx2CB506JI0atdljeZAL06qpIjLvmsulfT2Vnw=
+[2025-03-08T08:34:09.941Z INFO  worker::worker] [(0, 2)] Worker 0 listening to primary messages on 0.0.0.0:5002
+[2025-03-08T08:34:09.941Z INFO  worker::worker] [(0, 2)] Worker 0 listening to client transactions on 0.0.0.0:5003
+[2025-03-08T08:34:09.941Z INFO  worker::worker] [(0, 2)] Worker 0 listening to cross shard messages on 0.0.0.0:5005
+[2025-03-08T08:34:09.941Z INFO  worker::cs_msg_verifier_serial] CSMsgVerifier-Serial is running!
+[2025-03-08T08:34:09.941Z INFO  worker::worker] [(0, 2)] Worker 0 listening to worker messages on 0.0.0.0:5004
+[2025-03-08T08:34:09.941Z INFO  worker::tx_convertor] TxConversion is running!
+[2025-03-08T08:34:09.941Z INFO  worker::worker] Worker (0, 2) successfully booted on 47.243.168.208!
+[2025-03-08T08:34:09.941Z INFO  worker::cs_msg_sender_b] Send2Broker is running!
+[2025-03-08T08:34:09.941Z INFO  worker::executor_b] BExecutor is running!
+[2025-03-08T08:34:09.941Z INFO  worker::cs_msg_sender_b] client addr: 47.243.109.254:5000
+[2025-03-08T08:34:09.941Z INFO  worker::cs_msg_sender_b] nodeid: 2
+[2025-03-08T08:34:09.941Z INFO  worker::cs_msg_sender_b] cs_sender_nums: 3
+[2025-03-08T08:34:09.941Z INFO  worker::cs_msg_sender_b] cs_rev_nums: 2
+[2025-03-08T08:34:13.124Z INFO  network::receiver] Incoming connection established with 47.243.109.254:40580
+[2025-03-08T08:34:13.124Z WARN  network::receiver] Connection closed by peer 47.243.109.254:40580
+[2025-03-08T08:34:13.124Z INFO  network::receiver] Incoming connection established with 47.243.109.254:40586
+[2025-03-08T08:34:13.127Z INFO  network::receiver] Incoming connection established with 47.243.109.254:40592
+[2025-03-08T08:34:13.127Z WARN  network::receiver] Connection closed by peer 47.243.109.254:40592
+[2025-03-08T08:34:14.690Z INFO  network::receiver] Incoming connection established with 47.243.168.208:41642
+[2025-03-08T08:34:18.129Z INFO  network::receiver] Incoming connection established with 47.243.109.254:40600
+[2025-03-08T08:34:18.184Z INFO  worker::batch_maker] time out, create new batch
+[2025-03-08T08:34:18.184Z INFO  worker::batch_maker] Batch GbrxlHbawC1ALw1NVxQcd8Eo0Uugb9826JYtOXdvHpE= contains 5632 B and 11 external txs, 11 total_packaged_external_txs
+[2025-03-08T08:34:18.184Z INFO  network::reliable_sender] Outgoing connection established with 47.243.165.254:5004
+[2025-03-08T08:34:18.184Z INFO  network::reliable_sender] Outgoing connection established with 47.243.168.208:5010
+[2025-03-08T08:34:18.184Z INFO  network::reliable_sender] Outgoing connection established with 47.243.165.254:5010
+[2025-03-08T08:34:18.185Z INFO  network::simple_sender] Outgoing connection established with 47.243.168.208:5001
+[2025-03-08T08:34:18.209Z INFO  network::receiver] Incoming connection established with 47.243.168.208:37378
+[2025-03-08T08:34:18.302Z INFO  network::receiver] Incoming connection established with 47.243.165.254:33336
+[2025-03-08T08:34:18.330Z INFO  network::receiver] Incoming connection established with 47.243.165.254:33348
+[2025-03-08T08:34:18.384Z INFO  worker::batch_maker] time out, create new batch
+[2025-03-08T08:34:18.384Z INFO  worker::batch_maker] Batch M6J9fq3jcRybQ0z0/qCgC3j7TefLZiCzwDAotvJMGSs= contains 22016 B and 43 external txs, 54 total_packaged_external_txs
+[2025-03-08T08:34:18.586Z INFO  worker::batch_maker] time out, create new batch
+[2025-03-08T08:34:18.586Z INFO  worker::batch_maker] Batch Byfg97nmHfZc7J3FIbS8ehVfOk+3nvfZkK8OS97lzeI= contains 20992 B and 41 external txs, 95 total_packaged_external_txs
+[2025-03-08T08:34:18.787Z INFO  worker::batch_maker] time out, create new batch
+[2025-03-08T08:34:18.787Z INFO  worker::batch_maker] Batch bnCyZYwOQ95nrdg2kLYk6pgJ7ILYnEpbYxU7XY946Zo= contains 17408 B and 34 external txs, 129 total_packaged_external_txs
+[2025-03-08T08:34:18.793Z INFO  network::receiver] Incoming connection established with 47.243.165.254:56962
+[2025-03-08T08:34:18.794Z INFO  network::simple_sender] Outgoing connection established with 47.243.168.208:5004
+[2025-03-08T08:34:18.794Z INFO  network::receiver] Incoming connection established with 47.243.168.208:37380
+[2025-03-08T08:34:19.938Z INFO  worker::executor_b] [height: 32] total_general_txs: 54, total_external_txs: 18, total_cross_shard_txs: 0, total_commit_txs: 18, total_aborted_txs: 0
+[2025-03-08T08:34:19.939Z INFO  worker::executor_b] [height: 34] total_general_txs: 130, total_external_txs: 55, total_cross_shard_txs: 0, total_commit_txs: 55, total_aborted_txs: 0
+[2025-03-08T08:34:21.800Z INFO  worker::executor_b] [height: 35] total_general_txs: 206, total_external_txs: 87, total_cross_shard_txs: 0, total_commit_txs: 87, total_aborted_txs: 0
+[2025-03-08T08:34:21.801Z INFO  worker::executor_b] [height: 36] total_general_txs: 265, total_external_txs: 107, total_cross_shard_txs: 0, total_commit_txs: 107, total_aborted_txs: 0
+[2025-03-08T08:34:21.803Z INFO  worker::executor_b] [height: 37] total_general_txs: 340, total_external_txs: 133, total_cross_shard_txs: 0, total_commit_txs: 133, total_aborted_txs: 0
+[2025-03-08T08:34:21.804Z INFO  worker::executor_b] [height: 38] total_general_txs: 392, total_external_txs: 142, total_cross_shard_txs: 0, total_commit_txs: 142, total_aborted_txs: 0
+[2025-03-08T08:34:21.805Z INFO  worker::executor_b] [height: 39] total_general_txs: 462, total_external_txs: 165, total_cross_shard_txs: 0, total_commit_txs: 165, total_aborted_txs: 0
+[2025-03-08T08:34:22.943Z INFO  worker::executor_b] [height: 41] total_general_txs: 513, total_external_txs: 186, total_cross_shard_txs: 0, total_commit_txs: 186, total_aborted_txs: 0
+[2025-03-08T08:34:22.943Z INFO  worker::executor_b] [height: 44] total_general_txs: 515, total_external_txs: 187, total_cross_shard_txs: 0, total_commit_txs: 187, total_aborted_txs: 0
+[2025-03-08T08:39:13.571Z WARN  network::simple_sender] Failed to receive ACK from 47.243.168.208:5001
+[2025-03-08T08:39:13.571Z WARN  network::receiver] Connection closed by peer 47.243.168.208:41642
