@@ -269,7 +269,7 @@ class LocalBench:
                       # Parse logs and return the parser.
                       print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), "Parsing logs...")
                       # Print.info('Parsing logs...')
-                      logger = LogParser.process(PathMaker.logs_path(), e, shard_number, self.faults, self.bench_parameters.cs_faults, self.bench_parameters.total_txs, self.duration, res_ledger_MB, res_state_MB)
+                      logger = LogParser.process(PathMaker.logs_path(), e, shard_number, self.faults, self.bench_parameters.cs_faults, self.bench_parameters.total_txs, self.duration, self.sample_interval, res_ledger_MB, res_state_MB)
                       logger.print(PathMaker.result_file(
                           "local",
                           self.bench_parameters.acc_shard_type,

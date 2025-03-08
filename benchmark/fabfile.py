@@ -47,11 +47,12 @@ def local(ctx, debug=False):
 def remote(ctx, debug=False, remote_recompile=True):
     ''' Run benchmarks in remotehost '''
     bench_params = {
-        'shard_numbers': [4],
-        # 'shard_numbers': [14, 12, 10, 8, 6, 4],
-        'nodes': [10],
+        # 'shard_numbers': [4],
+        'shard_numbers': [10, 8, 6, 4],
+        'nodes': [4],
         'faults': 0,
         'cs_faults': 3,
+        'sample_interval': 1,
         'workers': 1,
         # 'runs': [0], # epoch i
         'runs': [1], # repeat `runs` times for each [shard_number, nodes]
@@ -86,8 +87,8 @@ def remoteinstall(ctx):
     ''' for remoteinstall '''
     try:
         remotebench = RemoteBench(ctx)
-        # remotebench.install()
-        # remotebench.install_repo()
+        remotebench.install()
+        remotebench.install_repo()
         remotebench.unload_input_files()
     except BenchError as e:
         Print.error(e)

@@ -489,8 +489,7 @@ class RemoteBench:
         # Parse logs and return the parser.
         Print.info('Parsing logs and computing performance...')
         return LogParser.process(PathMaker.logs_path(), epoch, shard_number, faults, self.bench_parameters.cs_faults, self.bench_parameters.total_txs, duration, sample_interval, res_ledger_MB, res_state_MB)
-
-
+        
     def _get_storage_cost(self, c, cmd_MB):
         storage_MB = 0
         res = c.run(cmd_MB, hide=True) # res.stdout is a str

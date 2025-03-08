@@ -10,13 +10,12 @@ import time
 from .utils import Print
 
 
-
 class ParseError(Exception):
     pass
 
 
 class LogParser:
-    def __init__(self, clients, primaries, workers, epoch, faults, cs_faults, total_txs, shard_nums, duration, res_ledger_MB, res_state_MB):
+    def __init__(self, clients, primaries, workers, epoch, faults, cs_faults, total_txs, shard_nums, duration, sample_interval, res_ledger_MB, res_state_MB):
         ## storage cost
         assert isinstance(res_ledger_MB, list)
         self.res_ledger_MB = res_ledger_MB
@@ -32,6 +31,7 @@ class LogParser:
         self.faults = faults
         self.cs_faults = cs_faults
         self.total_txs = total_txs
+        self.sample_interval = sample_interval
         self.epoch = epoch
 
         # 根据 faults 类型初始化分片委员会相关参数
@@ -239,7 +239,7 @@ class LogParser:
         if len(tmp) != 0:
           _, _, _, total_packaged_external_txs = tmp[-1]
         total_packaged_external_txs = int(total_packaged_external_txs)
-
+        
         tmp = findall(r'Batch ([^ ]+) contains sample tx (\d+)', log) 
         samples = {int(s): d for d, s in tmp} # {sample_tx.counter: batch.digest}
 
@@ -248,7 +248,6 @@ class LogParser:
         tmp = findall(r'\[(.*Z) .* Successfully execute sample tx (\d+) in batch', log) # t, tx        
         tmp = [(int(tx), self._to_posix(t)) for t, tx in tmp] # [(sample tx, executed_timestamp)]
         executed_txs = self._merge_results([tmp]) # executed_txs is a list. {sample tx: executed_timestamp}
-
 
         tmp = findall(r'\[(.*Z) .* total_general_txs: (\d+), total_external_txs: (\d+), total_cross_shard_txs: (\d+), total_commit_txs: (\d+), total_aborted_txs: (\d+)', log)
         end_t, total_general_txs, total_external_txs, total_cs_txs, total_commit_txs, total_aborted_txs = tmp[-1]
@@ -443,7 +442,7 @@ class LogParser:
 
     # 处理日志数据并返回 LogParser 实例
     @classmethod
-    def process(cls, directory, epoch, shard_nums, faults, cs_faults, total_txs, duration, res_ledger_MB, res_state_MB):
+    def process(cls, directory, epoch, shard_nums, faults, cs_faults, total_txs, duration, sample_interval, res_ledger_MB, res_state_MB):
         assert isinstance(directory, str)
 
         clients = [] 
@@ -460,7 +459,7 @@ class LogParser:
                 workers += [f.read()]
         
 
-        return cls(clients, primaries, workers, epoch, faults, cs_faults, total_txs, shard_nums, duration, res_ledger_MB, res_state_MB)
+        return cls(clients, primaries, workers, epoch, faults, cs_faults, total_txs, shard_nums, duration, sample_interval, res_ledger_MB, res_state_MB)
 
 if __name__ == "__main__":
 

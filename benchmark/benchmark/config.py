@@ -253,8 +253,10 @@ class BenchParameters:
     def __init__(self, json):
         try:
             self.faults = int(json['faults'])
+
             self.cs_faults = int(json['cs_faults'])
             self.sample_interval = int(json['sample_interval'])
+
 
             nodes = json['nodes']
             nodes = nodes if isinstance(nodes, list) else [nodes]
