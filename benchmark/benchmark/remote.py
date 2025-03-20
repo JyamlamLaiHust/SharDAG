@@ -37,19 +37,20 @@ class RemoteBench:
 
         # remote hosts
         self.user='root'
-        self.connect = {"password": 'SharDAG123'}
+        self.connect = {"password": '021231'}
         self.base_port = 5000
-        self.nodes_per_host = 10
+        # self.nodes_per_host = 10
+        self.nodes_per_host = 4
         self.hosts = [
             # 每天开机都要检查 ip
 
-            '47.243.168.208:22',
-            '47.243.165.254:22',
-            '47.243.171.254:22',
-            '47.243.168.147:22',
+            '192.168.52.141:22',
+            '192.168.52.142:22',
+            '192.168.52.143:22',
+            '192.168.52.144:22',
           ]
         self.ip_to_host = { host.split(':')[0]:host for host in self.hosts}
-        self.client_addr = f"47.243.109.254:5000"
+        self.client_addr = f"192.168.52.138:5000"
 
 
     def _check_stderr(self, output):
@@ -96,8 +97,8 @@ class RemoteBench:
             
             # cmd = 'apt-get install unzip ; rm -r acc-input ; unzip acc-input.zip'
             g.run(f'{cmd} || true', hide=True)
-            # g.put('/home/jaylen/SharDAG/test-workload/input-e0.csv', './input')
-            g.put('/root/SharDAG/test-workload/input-e0.csv', './input')
+            g.put('/home/jaylen/SharDAG/test-workload/input-e0.csv', './input')
+            # g.put('/root/SharDAG/test-workload/input-e0.csv', './input')
         except (GroupException, ExecutionError) as e:
             e = FabricError(e) if isinstance(e, GroupException) else e
             raise BenchError('Failed to upload input files', e)        
@@ -488,8 +489,7 @@ class RemoteBench:
 
         # Parse logs and return the parser.
         Print.info('Parsing logs and computing performance...')
-        return LogParser.process(PathMaker.logs_path(), epoch, shard_number, faults, self.bench_parameters.cs_faults, self.bench_parameters.total_txs, duration, sample_interval, res_ledger_MB, res_state_MB)
-
+        return LogParser.process(PathMaker.logs_path(), epoch, shard_number, faults, self.bench_parameters.cs_faults, self.bench_parameters.total_txs, duration, res_ledger_MB, res_state_MB)
 
     def _get_storage_cost(self, c, cmd_MB):
         storage_MB = 0
