@@ -9,8 +9,8 @@ from benchmark.plot import Plot
 def local(ctx, debug=False):
     ''' Run benchmarks on localhost '''
     bench_params = {
-        'shard_numbers': [4],
-        # 'shard_numbers': [4, 6, 8, 10, 12, 14, 16],
+        # 'shard_numbers': [4],
+        'shard_numbers': [4, 6, 8, 10, 12, 14, 16],
         'nodes': [4],
         'faults': 0,
         'cs_faults': 0,
@@ -48,13 +48,14 @@ def local(ctx, debug=False):
 def remote(ctx, debug=False, remote_recompile=True):
     ''' Run benchmarks in remotehost '''
     bench_params = {
-        'shard_numbers': [4],
-        # 'shard_numbers': [14, 12, 10, 8, 6, 4],
+        # 'shard_numbers': [10, 8, 6, 4],
+        # 'shard_numbers': [14, 12, 10, 8, 6],
+        'shard_numbers': [10],
         # 'nodes': [10],
         'nodes': [4],
         'faults': 0,
-        # 'cs_faults': 3,
-        'cs_faults': 0,
+        'cs_faults': 3,
+        # 'cs_faults': 0,
         'sample_interval': 1,
 
         'workers': 1,
@@ -64,7 +65,7 @@ def remote(ctx, debug=False, remote_recompile=True):
         # 'rate': [100, 200], # total transaction sending rate
         'rate': [50], # total transaction sending rate
         # 'duration': 300, # running duration
-        'duration': 100, # running duration
+        'duration': 30, # running duration
         # 'total_txs': 10000000, 
         'total_txs': 1000, 
         'tx_size': 512, # B
@@ -106,7 +107,8 @@ def remoteinstall(ctx):
 def plot(ctx):
     ''' plot the overall tps and latency graphs'''
     try:
-        input_rates = [100, 200]
+        # input_rates = [100, 200]
+        input_rates = [50]
         plot = Plot()
         plot.draw_tps_latency(input_rates)
     except BenchError as e:

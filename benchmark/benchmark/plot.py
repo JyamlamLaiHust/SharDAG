@@ -83,7 +83,8 @@ class Plot:
       bar.set_hatch(pat)
       # bar.set_linewidth(3)
 
-    g.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y/1000) + 'K'))
+    # g.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y/1000) + 'K'))
+    g.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y) + ' tx/s')) 
     g.legend(
       loc='upper left', 
       bbox_to_anchor=(-0.02,1.03), 
@@ -91,14 +92,20 @@ class Plot:
       labelspacing=0.15, 
       handletextpad=0.3, 
       borderpad=0.2, 
-      prop = {'size':20}
+      prop = {'size':12}
     )
-    y_major_locator=MultipleLocator(4000)
+    y_major_locator=MultipleLocator(10)
     ax=plt.gca()
     ax.yaxis.set_major_locator(y_major_locator)
 
+    # 添加刻度
+    plt.xticks(rotation=45)
+    plt.yticks()
+
     # g.legend_.remove()
+
     plt.savefig(output_file, bbox_inches='tight', dpi=600)
+    # plt.savefig(output_file, dpi=600)
     plt.clf()
 
   # 绘制延迟图
@@ -116,6 +123,9 @@ class Plot:
     g.set_xlabel("Shard number")
     g.set_ylabel("Latency (sec)")
 
+    plt.xticks(rotation=45)
+    plt.yticks()
+
     bars = g.patches
     hatches=np.repeat(self.pattern,7)
     hatches=np.repeat(self.pattern,7)
@@ -123,6 +133,7 @@ class Plot:
       bar.set_hatch(pat)
       # bar.set_linewidth(3)
     
+    # g.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y/1000)))
     g.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y/1000)))
     g.legend(
       loc='upper left', 
@@ -131,9 +142,9 @@ class Plot:
       labelspacing=0.15, 
       handletextpad=0.3, 
       borderpad=0.2, 
-      prop = {'size':20}
+      prop = {'size':12}
     )
-    y_major_locator=MultipleLocator(20000)
+    y_major_locator=MultipleLocator(2000)
     ax=plt.gca()
     ax.yaxis.set_major_locator(y_major_locator)
 
