@@ -94,7 +94,7 @@ class Plot:
       borderpad=0.2, 
       prop = {'size':12}
     )
-    y_major_locator=MultipleLocator(10)
+    y_major_locator=MultipleLocator(50)
     ax=plt.gca()
     ax.yaxis.set_major_locator(y_major_locator)
 
@@ -166,6 +166,7 @@ class Plot:
     )
     
     for input_rate in input_rates:
+      # res_path = join(self.data, f'res-hash-{input_rate}-30s-tps-latency.csv')
       res_path = join(self.data, f'res-hash-{input_rate}-300s-tps-latency.csv')
       self._parse_res(res_path, input_rate)
       
