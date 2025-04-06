@@ -108,7 +108,7 @@ class PathMaker:
     @staticmethod
     def workload_input_file(e): # epoch e contains a fixed number of txs
         assert isinstance(e, int) and e >= 0
-        return join(PathMaker.input_path(), f'input-e{e}.csv')
+        return join(PathMaker.input_path(), f'input-e1.csv')
 
     @staticmethod
     def acc2shard_file_default():
@@ -118,13 +118,14 @@ class PathMaker:
     def acc2shard_file(e, shard_num): # the initial acc2shard map of epoch e
         assert isinstance(e, int) and e >= 0
         assert isinstance(shard_num, int) and shard_num >= 0
-        return join(PathMaker.input_path(), f'acc2shard-e{e}-s{shard_num}.csv')
+        # return join(PathMaker.input_path(), f'acc2shard-e{e}-s{shard_num}.csv')
+        return join(PathMaker.input_path(), f'acc2shard-e1-s8.csv')
 
     @staticmethod
     def actacc2shard_file(e, shard_num): # the initial act-acc2shard map of epoch e
         assert isinstance(e, int) and e >= 0
         assert isinstance(shard_num, int) and shard_num >= 0
-        return join(PathMaker.acc_input_path(), f'act-acc2shard-e{e}-s{shard_num}.csv')
+        return join(PathMaker.acc_input_path(), f'act-acc2shard-e1-s8.csv')
 
     @staticmethod
     def brokers_file():

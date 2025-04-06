@@ -97,8 +97,9 @@ class RemoteBench:
             
             # cmd = 'apt-get install unzip ; rm -r acc-input ; unzip acc-input.zip'
             g.run(f'{cmd} || true', hide=True)
-            # g.put('/root/SharDAG/test-workload/input-e0.csv', './input')
             g.put('/root/SharDAG/test-workload/input-e1.csv', './input')
+            
+
         except (GroupException, ExecutionError) as e:
             e = FabricError(e) if isinstance(e, GroupException) else e
             raise BenchError('Failed to upload input files', e)        
@@ -394,8 +395,8 @@ class RemoteBench:
                       PathMaker.ft_db_path(nodeid, shardid),
                       # fot testing tps & lantecy
                     #   PathMaker.acc2shard_file_default(),
-                      PathMaker.acc2shard_file_default(),
-                    #   PathMaker.acc2shard_file(epoch, shard_num),
+                    #   PathMaker.acc2shard_file_default(),
+                      PathMaker.acc2shard_file(epoch, shard_num),
                       PathMaker.actacc2shard_file(epoch, shard_num),
                       epoch,
                     #   self.bench_parameters.sample_interval,
