@@ -48,6 +48,8 @@ class RemoteBench:
             '192.168.52.142:22',
             '192.168.52.143:22',
             '192.168.52.144:22',
+            '192.168.52.145:22',
+            '192.168.52.146:22',
           ]
         self.ip_to_host = { host.split(':')[0]:host for host in self.hosts}
         self.client_addr = f"192.168.52.138:5000"
@@ -394,10 +396,10 @@ class RemoteBench:
                       PathMaker.db_path(nodeid, shardid, 0),
                       PathMaker.ft_db_path(nodeid, shardid),
                       # fot testing tps & lantecy
-                    #   PathMaker.acc2shard_file_default(),
-                    #   PathMaker.acc2shard_file_default(),
-                      PathMaker.acc2shard_file(epoch, shard_num),
-                      PathMaker.actacc2shard_file(epoch, shard_num),
+                      PathMaker.acc2shard_file_default(),
+                      PathMaker.acc2shard_file_default(),
+                    #   PathMaker.acc2shard_file(epoch, shard_num),
+                    #   PathMaker.actacc2shard_file(epoch, shard_num),
                       epoch,
                     #   self.bench_parameters.sample_interval,
                       debug,

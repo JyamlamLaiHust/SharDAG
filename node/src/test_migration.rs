@@ -30,7 +30,9 @@ async fn main(){
   println!("Run main() in h_store_main.rs");
 
   // 初始化账户文件路径
-  let init_acc_file = "/root/SharDAG-WorkSpace/inputv2/acc2shard-e9-s2.csv";
+  // let init_acc_file = "/root/SharDAG-WorkSpace/inputv2/acc2shard-e9-s2.csv";
+  // let init_acc_file = "/home/jaylen/SharDAG/inputv2/acc2shard-e9-s2.csv";
+  let init_acc_file = "/root/SharDAG/inputv2/acc2shard-e9-s2.csv";
 
   // 结果保存路径
   let res_path = "../test-state-store/res-migration.csv";

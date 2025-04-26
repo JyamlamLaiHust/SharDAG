@@ -184,5 +184,6 @@ $ fab plot
 ```
 This command creates the tps and latency graphs in a folder called `data` (which is automatically created if it doesn't already exists). 
 
-
+## Notice
+The shardag must be stored in the /root directory. Otherwise, unexpected error reports may occur.
 

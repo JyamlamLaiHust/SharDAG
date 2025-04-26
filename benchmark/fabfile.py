@@ -48,8 +48,8 @@ def local(ctx, debug=False):
 def remote(ctx, debug=False, remote_recompile=True):
     ''' Run benchmarks in remotehost '''
     bench_params = {
-        'shard_numbers': [8],
-        # 'shard_numbers': [14, 12, 10, 8, 6],
+        'shard_numbers': [14, 12],
+        # 'shard_numbers': [12, 10, 8, 6, 4],
         # 'nodes': [10],
         'nodes': [4],
         'faults': 0,
@@ -70,8 +70,8 @@ def remote(ctx, debug=False, remote_recompile=True):
         'tx_size': 512, # B
 
         'acc_shard_type': 0, # 0: Hash, 1: Graph
-        'executor_type': 0, # 0: SharDAG, 1: Monoxide, 2: Broker
-        'state_store_type': 0, # 0: TStore, 1: MStore
+        'executor_type': [1, 2], # 0: SharDAG, 1: Monoxide, 2: Broker
+        'state_store_type': 1, # 0: TStore, 1: MStore
         'append_type': 0, # 0: Dual-mode, 1: Serial
     }
     node_params = {
@@ -107,7 +107,6 @@ def plot(ctx):
     ''' plot the overall tps and latency graphs'''
     try:
         input_rates = [100, 200]
-        # input_rates = [50]
         plot = Plot()
         plot.draw_tps_latency(input_rates)
     except BenchError as e:

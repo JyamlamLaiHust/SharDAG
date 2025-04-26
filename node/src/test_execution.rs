@@ -61,13 +61,14 @@ async fn main(){
   let _ = fs::remove_dir_all(full_t_path);
 
   // 构建账户到分片映射 account to shard映射文件路径
-  let acc2shard_file = format!("/root/SharDAG-WorkSpace/inputv2/acc2shard-e{}-s8.csv", epoch);
+  let acc2shard_file = format!("/root/SharDAG/test-workload/acc2shard-e{}-s8.csv", epoch);
+
   println!("acc2shard file {}", acc2shard_file);
   // 构建负载文件路径
-  let workload_file = format!("/root/SharDAG-WorkSpace/inputv2/input-e{}.csv", epoch);
+  let workload_file = format!("/root/SharDAG/test-workload/input-e{}.csv", epoch);
   println!("workload file: {:?}", workload_file);
   // 构建活动账户到分片映射文件路径
-  let actacc2shard_file = format!("/root/SharDAG-WorkSpace/inputv2/act-acc2shard-e{}-s8.csv", epoch);
+  let actacc2shard_file = format!("/root/SharDAG/test-workload/act-acc2shard-e{}-s8.csv", epoch);
   println!("actacc2shard file {}", actacc2shard_file);
 
   
